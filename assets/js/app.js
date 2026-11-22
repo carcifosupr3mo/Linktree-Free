@@ -153,7 +153,7 @@ function productCard(it, i) {
   const img = it.image || FALLBACK_IMG;
   return `
     <article class="product rise ${it.status === 'sold' ? 'sold' : ''}" style="--i:${Math.min(i, 10)}">
-      <div class="thumb"><img src="${esc(img)}" alt="${esc(it.name)}" width="800" height="600" loading="lazy" decoding="async"></div>
+      <div class="thumb"><img class="${img.includes('/placeholders/') ? 'is-ph' : ''}" src="${esc(img)}" alt="${esc(it.name)}" width="800" height="600" loading="lazy" decoding="async"></div>
       <div class="p-body">
         <div class="badges"><span class="badge st-${esc(it.status)}">${esc(STATUS[it.status] || it.status)}</span>${it.placeholder ? '<span class="badge ph">Placeholder</span>' : ''}</div>
         <span class="brand">${esc([it.brand, it.model].filter(Boolean).join(' · '))}</span>
@@ -208,7 +208,7 @@ function openProduct(id, pushHash = true) {
   pd().innerHTML = `
     <button class="icon-btn pd-close" type="button" aria-label="Chiudi scheda" data-close>${icon('x')}</button>
     <button class="pd-image" type="button" aria-label="Ingrandisci immagine di ${esc(it.name)}" data-zoom>
-      <img src="${esc(img)}" alt="${esc(it.name)}" width="800" height="600" decoding="async">
+      <img class="${img.includes('/placeholders/') ? 'is-ph' : ''}" src="${esc(img)}" alt="${esc(it.name)}" width="800" height="600" decoding="async">
       <span class="pd-zoom">${icon('zoom')} Ingrandisci</span>
     </button>
     <div class="pd-body">
