@@ -1,25 +1,49 @@
 [
   {
     "id": "cameras",
-    "name": "Fotocamere",
+    "name": {
+      "it": "Fotocamere",
+      "en": "Cameras",
+      "fr": "Appareils photo",
+      "de": "Kameras",
+      "es": "Cámaras"
+    },
     "icon": "camera",
     "order": 10
   },
   {
     "id": "lenses",
-    "name": "Obiettivi",
+    "name": {
+      "it": "Obiettivi",
+      "en": "Lenses",
+      "fr": "Objectifs",
+      "de": "Objektive",
+      "es": "Objetivos"
+    },
     "icon": "lens",
     "order": 20
   },
   {
     "id": "accessories",
-    "name": "Accessori fotografici",
+    "name": {
+      "it": "Accessori fotografici",
+      "en": "Photo accessories",
+      "fr": "Accessoires photo",
+      "de": "Foto-Zubehör",
+      "es": "Accesorios de foto"
+    },
     "icon": "tripod",
     "order": 30
   },
   {
     "id": "video",
-    "name": "Attrezzatura video",
+    "name": {
+      "it": "Attrezzatura video",
+      "en": "Video gear",
+      "fr": "Matériel vidéo",
+      "de": "Videoausrüstung",
+      "es": "Equipo de vídeo"
+    },
     "icon": "video",
     "order": 40
   }

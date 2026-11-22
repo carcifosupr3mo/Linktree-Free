@@ -10,7 +10,7 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
   const viewports = { 'mobile (iPhone 13)': devices['iPhone 13'], 'tablet 820x1180': { viewport: { width: 820, height: 1180 } }, 'desktop 1440x900': { viewport: { width: 1440, height: 900 } } };
   for (const [name, opts] of Object.entries(viewports)) {
     console.log('\n== ' + name);
-    const ctx = await b.newContext({ ...opts, permissions: ['clipboard-read', 'clipboard-write'] });
+    const ctx = await b.newContext({ ...opts, locale: 'it-IT', permissions: ['clipboard-read', 'clipboard-write'] });
     const p = await ctx.newPage();
     const errs = []; const bad = [];
     p.on('console', m => m.type() === 'error' && errs.push(m.text()));
@@ -42,6 +42,9 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     const badImgs = await p.evaluate(() => [...document.images].filter(i => i.getAttribute('src') && !i.naturalWidth).map(i => i.getAttribute('src')));
     const imgs = badImgs.length; if (imgs) console.log('   non caricate:', badImgs);
     ok(imgs === 0, 'tutte le immagini caricate');
+
+    ok(await p.evaluate(() => document.getElementById('avatar').naturalWidth > 0 && document.getElementById('avatar').src.endsWith('profile.webp')), 'nuova foto profilo caricata');
+    ok(await p.evaluate(() => document.documentElement.lang) === 'it', 'lingua italiana da locale it-IT');
 
     // ricerca
     await p.fill('#search', 'dji'); await p.waitForTimeout(300);
@@ -99,6 +102,51 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     ok(bad.length === 0, 'nessuna risposta HTTP >= 400' + (bad.length ? ' ' + bad : ''));
     ok(errs.length === 0, 'nessun errore in console' + (errs.length ? ' ' + errs : ''));
     await ctx.close();
+  }
+
+  console.log('\n== Lingue');
+  const langCase = async (label, ctxOpts, expectLang, cta, chipAll, extra) => {
+    const c = await b.newContext(ctxOpts); const p = await c.newPage();
+    const errs = []; p.on('pageerror', e => errs.push(String(e))); p.on('console', m => m.type() === 'error' && errs.push(m.text()));
+    await p.goto(BASE + '/'); await p.waitForSelector('html[data-ready]');
+    ok(await p.evaluate(() => document.documentElement.lang) === expectLang, `${label} → lang=${expectLang}`);
+    ok((await p.locator('.featured-card .btn').textContent()).trim() === cta, `${label} → CTA "${cta}"`);
+    ok((await p.locator('.chip').first().textContent()).trim().startsWith(chipAll), `${label} → filtro "${chipAll}"`);
+    if (extra) ok((await p.locator('body').textContent()).includes(extra), `${label} → testo "${extra}"`);
+    ok(errs.length === 0, `${label} → nessun errore`);
+    await c.close();
+  };
+  await langCase('locale de-DE', { locale: 'de-DE' }, 'de', 'PHOTOCARCIFO BESUCHEN', 'Alle', 'Wird mit der Sony ZV-E10 II verwendet.');
+  await langCase('locale fr-CH', { locale: 'fr-CH' }, 'fr', 'VISITER PHOTOCARCIFO', 'Tout', 'Utilisé avec le Nikon D7200.');
+  await langCase('locale es-ES', { locale: 'es-ES' }, 'es', 'VISITAR PHOTOCARCIFO', 'Todo', 'Se usa con la Nikon D7200.');
+  await langCase('locale it-IT', { locale: 'it-IT' }, 'it', 'VISITA PHOTOCARCIFO', 'Tutti', 'Usato con la Nikon D7200.');
+  await langCase('locale en-US', { locale: 'en-US' }, 'en', 'VISIT PHOTOCARCIFO', 'All', 'Used with the Nikon D7200.');
+  await langCase('locale ja-JP (non supportata → inglese)', { locale: 'ja-JP' }, 'en', 'VISIT PHOTOCARCIFO', 'All', 'Used with the Nikon D7200.');
+  {
+    const c = await b.newContext({ locale: 'it-IT' }); const p = await c.newPage();
+    await p.goto(BASE + '/'); await p.waitForSelector('html[data-ready]');
+    await p.click('#lang-btn');
+    ok(await p.locator('#lang-menu button').count() === 5, 'menu lingue con 5 voci');
+    ok(await p.locator('#lang-menu button[aria-current="true"]').getAttribute('data-lang') === 'it', 'lingua attiva evidenziata');
+    await p.keyboard.press('Escape');
+    ok(await p.locator('#lang-menu').isHidden(), 'Esc chiude il menu lingue');
+    await p.click('#lang-btn'); await p.click('#lang-menu [data-lang="es"]');
+    ok(await p.evaluate(() => document.documentElement.lang) === 'es', 'cambio lingua manuale → es');
+    ok((await p.locator('#equipment-title').textContent()) === 'Mi equipo', 'titolo sezione tradotto');
+    ok((await p.title()).includes('Equipo fotográfico'), 'titolo pagina tradotto');
+    await p.reload(); await p.waitForSelector('html[data-ready]');
+    ok(await p.evaluate(() => document.documentElement.lang) === 'es', 'scelta lingua ricordata dopo reload');
+    await p.locator('.product h3 button').nth(2).click(); await p.waitForSelector('#product-dialog[open]');
+    ok((await p.locator('#product-dialog .specs dt').first().textContent()) === 'Distancia focal', 'specifiche tradotte nella scheda');
+    await p.click('#lang-btn', { force: true }).catch(() => {});
+    await c.close();
+  }
+  {
+    const c = await b.newContext({ locale: 'xx-XX' }); const p = await c.newPage();
+    await p.addInitScript(() => Object.defineProperty(navigator, 'languages', { get: () => [] }));
+    await p.goto(BASE + '/'); await p.waitForSelector('html[data-ready]');
+    ok(await p.evaluate(() => document.documentElement.lang) === 'en', 'nessuna lingua di sistema → inglese');
+    await c.close();
   }
 
   console.log('\n== Link esterni / 404');

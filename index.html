@@ -35,21 +35,26 @@
 
   <script>
     /* Applica il tema salvato prima del rendering per evitare lampeggiamenti. Default: chiaro. */
-    try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
+    try { var savedTheme = localStorage.getItem('theme'); if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.dataset.theme = savedTheme; } catch (e) {}
   </script>
   <link rel="preload" href="data/profile.json" as="fetch" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css?v=20261122e">
-  <script src="assets/js/app.js?v=20261122e" defer></script>
+  <link rel="stylesheet" href="assets/css/style.css?v=20261122g">
+  <script src="assets/js/i18n.js?v=20261122g" defer></script>
+  <script src="assets/js/app.js?v=20261122g" defer></script>
 </head>
 <body>
-  <a class="skip" href="#main">Vai al contenuto</a>
+  <a class="skip" href="#main" data-i18n="skip">Vai al contenuto</a>
 
   <header class="site-header">
     <div class="container">
       <a class="logo" href="#top" aria-label="Nathan Pollini · Gear">Nathan Pollini</a>
-      <nav class="nav" aria-label="Navigazione principale">
-        <a class="hide-sm" href="#equipment">Attrezzatura</a>
+      <nav class="nav" aria-label="Navigazione principale" data-i18n-attr="aria-label:nav_label">
+        <a class="hide-sm" href="#equipment" data-i18n="nav_gear">Attrezzatura</a>
         <a class="nav-cta" href="https://photocarcifo.ch" target="_blank" rel="noopener noreferrer">Photocarcifo</a>
+        <div class="lang">
+          <button id="lang-btn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false"></button>
+          <ul id="lang-menu" class="lang-menu" hidden></ul>
+        </div>
         <button id="theme-toggle" class="icon-btn theme-toggle" type="button" aria-label="Passa al tema scuro" title="Cambia tema"></button>
       </nav>
     </div>
@@ -59,7 +64,7 @@
     <div id="top" class="hero">
       <div class="container linktree">
         <header class="profile" id="profile">
-          <img id="avatar" class="avatar" src="assets/img/profile.svg" alt="Foto profilo di Nathan Pollini" width="120" height="120" decoding="async">
+          <img id="avatar" class="avatar" src="assets/img/profile.webp" alt="Foto profilo di Nathan Pollini" width="120" height="120" decoding="async">
           <p id="tagline" class="tagline"></p>
           <h1 id="name">Nathan Pollini</h1>
           <p id="bio" class="bio"></p>
@@ -73,18 +78,18 @@
 
     <section id="equipment" class="container" aria-labelledby="equipment-title">
       <div class="section-head">
-        <span class="eyebrow blue">Catalogo</span>
-        <h2 id="equipment-title">La mia attrezzatura</h2>
-        <p class="muted">Fotocamere, obiettivi, accessori e attrezzatura video.</p>
+        <span class="eyebrow blue" data-i18n="catalog">Catalogo</span>
+        <h2 id="equipment-title" data-i18n="gear_title">La mia attrezzatura</h2>
+        <p class="muted" data-i18n="gear_sub">Fotocamere, obiettivi, accessori e attrezzatura video.</p>
       </div>
 
       <div class="toolbar" role="search">
         <div class="search">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input id="search" type="search" placeholder="Cerca marca, modello, specifiche…" aria-label="Cerca nell'attrezzatura" autocomplete="off" spellcheck="false">
+          <input id="search" type="search" placeholder="Cerca marca, modello, specifiche…" aria-label="Cerca nell'attrezzatura" data-i18n-attr="placeholder:search_ph;aria-label:search_label" autocomplete="off" spellcheck="false">
           <kbd aria-hidden="true">/</kbd>
         </div>
-        <div id="chips" class="chips" role="group" aria-label="Filtra per categoria"></div>
+        <div id="chips" class="chips" role="group" aria-label="Filtra per categoria" data-i18n-attr="aria-label:cat_filter"></div>
       </div>
       <p id="count" class="muted count" role="status" aria-live="polite"></p>
       <div id="catalog"></div>

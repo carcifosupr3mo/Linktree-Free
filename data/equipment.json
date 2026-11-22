@@ -29,7 +29,13 @@
     "name": "Sony E PZ 18-105mm f/4 G OSS",
     "brand": "Sony",
     "model": "E PZ 18-105mm f/4 G OSS",
-    "description": "Usato con la Sony ZV-E10 II.",
+    "description": {
+      "it": "Usato con la Sony ZV-E10 II.",
+      "en": "Used with the Sony ZV-E10 II.",
+      "fr": "Utilisé avec le Sony ZV-E10 II.",
+      "de": "Wird mit der Sony ZV-E10 II verwendet.",
+      "es": "Se usa con la Sony ZV-E10 II."
+    },
     "image": "assets/img/products/sony-18-105-f4.webp",
     "specs": {
       "Focale": "18-105 mm",
@@ -44,7 +50,13 @@
     "name": "Nikon AF-S DX 18-300mm f/3.5-6.3G ED",
     "brand": "Nikon",
     "model": "AF-S DX 18-300mm f/3.5-6.3G ED",
-    "description": "Usato con la Nikon D7200.",
+    "description": {
+      "it": "Usato con la Nikon D7200.",
+      "en": "Used with the Nikon D7200.",
+      "fr": "Utilisé avec le Nikon D7200.",
+      "de": "Wird mit der Nikon D7200 verwendet.",
+      "es": "Se usa con la Nikon D7200."
+    },
     "image": "assets/img/products/nikon-af-s-dx-18-300.webp",
     "specs": {
       "Focale": "18-300 mm",
@@ -59,7 +71,13 @@
     "name": "K&F Concept ND2-ND400 72mm",
     "brand": "K&F Concept",
     "model": "ND2-ND400 variabile 72 mm",
-    "description": "Filtro ND variabile, usato con il Sony 18-105mm f/4.",
+    "description": {
+      "it": "Filtro ND variabile, usato con il Sony 18-105mm f/4.",
+      "en": "Variable ND filter, used with the Sony 18-105mm f/4.",
+      "fr": "Filtre ND variable, utilisé avec le Sony 18-105mm f/4.",
+      "de": "Variabler ND-Filter, verwendet mit dem Sony 18-105mm f/4.",
+      "es": "Filtro ND variable, usado con el Sony 18-105mm f/4."
+    },
     "image": "assets/img/products/kf-concept-nd2-nd400-72mm.webp",
     "specs": {
       "Diametro": "72 mm",
@@ -85,8 +103,20 @@
     "category": "video",
     "name": "DJI Mic Mini",
     "brand": "DJI",
-    "model": "Mic Mini (2 TX + 1 RX, custodia di ricarica)",
-    "description": "Kit con 2 trasmettitori, 1 ricevitore e custodia di ricarica.",
+    "model": {
+      "it": "Mic Mini (2 TX + 1 RX, custodia di ricarica)",
+      "en": "Mic Mini (2 TX + 1 RX, charging case)",
+      "fr": "Mic Mini (2 TX + 1 RX, étui de charge)",
+      "de": "Mic Mini (2 TX + 1 RX, Ladeetui)",
+      "es": "Mic Mini (2 TX + 1 RX, estuche de carga)"
+    },
+    "description": {
+      "it": "Kit con 2 trasmettitori, 1 ricevitore e custodia di ricarica.",
+      "en": "Kit with 2 transmitters, 1 receiver and charging case.",
+      "fr": "Kit avec 2 émetteurs, 1 récepteur et étui de charge.",
+      "de": "Set mit 2 Sendern, 1 Empfänger und Ladeetui.",
+      "es": "Kit con 2 transmisores, 1 receptor y estuche de carga."
+    },
     "image": "assets/img/products/dji-mic-mini.webp",
     "specs": {},
     "url": null,
@@ -95,10 +125,22 @@
   {
     "id": "falcam-f38-quick-release-rs4-mini",
     "category": "video",
-    "name": "Falcam F38 Quick Release Kit per RS 4 Mini",
+    "name": {
+      "it": "Falcam F38 Quick Release Kit per RS 4 Mini",
+      "en": "Falcam F38 Quick Release Kit for RS 4 Mini",
+      "fr": "Falcam F38 Quick Release Kit pour RS 4 Mini",
+      "de": "Falcam F38 Quick Release Kit für RS 4 Mini",
+      "es": "Falcam F38 Quick Release Kit para RS 4 Mini"
+    },
     "brand": "Falcam",
     "model": "F38B5201",
-    "description": "Kit a sgancio rapido per il gimbal DJI RS 4 Mini.",
+    "description": {
+      "it": "Kit a sgancio rapido per il gimbal DJI RS 4 Mini.",
+      "en": "Quick release kit for the DJI RS 4 Mini gimbal.",
+      "fr": "Kit à dégagement rapide pour le gimbal DJI RS 4 Mini.",
+      "de": "Schnellwechsel-Set für den DJI RS 4 Mini Gimbal.",
+      "es": "Kit de liberación rápida para el gimbal DJI RS 4 Mini."
+    },
     "image": "assets/img/products/falcam-f38-quick-release-rs4-mini.webp",
     "specs": {},
     "url": null,
@@ -107,10 +149,22 @@
   {
     "id": "smallrig-shoulder-strap-4118b",
     "category": "video",
-    "name": "SmallRig Shoulder Strap per stabilizzatori DJI",
+    "name": {
+      "it": "SmallRig Shoulder Strap per stabilizzatori DJI",
+      "en": "SmallRig Shoulder Strap for DJI stabilizers",
+      "fr": "SmallRig Shoulder Strap pour stabilisateurs DJI",
+      "de": "SmallRig Shoulder Strap für DJI-Stabilisatoren",
+      "es": "SmallRig Shoulder Strap para estabilizadores DJI"
+    },
     "brand": "SmallRig",
     "model": "4118B",
-    "description": "Tracolla per stabilizzatori DJI.",
+    "description": {
+      "it": "Tracolla per stabilizzatori DJI.",
+      "en": "Shoulder strap for DJI stabilizers.",
+      "fr": "Sangle d'épaule pour stabilisateurs DJI.",
+      "de": "Schultergurt für DJI-Stabilisatoren.",
+      "es": "Correa de hombro para estabilizadores DJI."
+    },
     "image": "assets/img/products/smallrig-shoulder-strap-4118b.webp",
     "specs": {},
     "url": null,
@@ -119,10 +173,22 @@
   {
     "id": "falcam-f38-sgancio-tracolla-v2",
     "category": "accessories",
-    "name": "Falcam F38 sgancio rapido per tracolla V2",
+    "name": {
+      "it": "Falcam F38 sgancio rapido per tracolla V2",
+      "en": "Falcam F38 quick release for strap V2",
+      "fr": "Falcam F38 dégagement rapide pour sangle V2",
+      "de": "Falcam F38 Schnellverschluss für Trageriemen V2",
+      "es": "Falcam F38 liberación rápida para correa V2"
+    },
     "brand": "Falcam",
     "model": "#3141",
-    "description": "Sgancio rapido per tracolla.",
+    "description": {
+      "it": "Sgancio rapido per tracolla.",
+      "en": "Quick release for a strap.",
+      "fr": "Dégagement rapide pour sangle.",
+      "de": "Schnellverschluss für Trageriemen.",
+      "es": "Liberación rápida para correa."
+    },
     "image": "assets/img/products/falcam-f38-sgancio-tracolla-v2.webp",
     "specs": {},
     "url": null,
@@ -134,7 +200,13 @@
     "name": "SanDisk Extreme 256 GB V30",
     "brand": "SanDisk",
     "model": "Extreme 256 GB V30",
-    "description": "2 schede microSD con adattatore SD, usate nella Nikon D7200.",
+    "description": {
+      "it": "2 schede microSD con adattatore SD, usate nella Nikon D7200.",
+      "en": "2 microSD cards with SD adapter, used in the Nikon D7200.",
+      "fr": "2 cartes microSD avec adaptateur SD, utilisées dans le Nikon D7200.",
+      "de": "2 microSD-Karten mit SD-Adapter, verwendet in der Nikon D7200.",
+      "es": "2 tarjetas microSD con adaptador SD, usadas en la Nikon D7200."
+    },
     "image": "assets/img/products/sandisk-extreme-256gb-v30.webp",
     "specs": {
       "Capacità": "256 GB",
@@ -149,7 +221,13 @@
     "name": "SanDisk Extreme PRO UHS-II 512 GB V60",
     "brand": "SanDisk",
     "model": "Extreme PRO UHS-II 512 GB V60",
-    "description": "1 scheda, usata nella Sony ZV-E10 II.",
+    "description": {
+      "it": "1 scheda, usata nella Sony ZV-E10 II.",
+      "en": "1 card, used in the Sony ZV-E10 II.",
+      "fr": "1 carte, utilisée dans le Sony ZV-E10 II.",
+      "de": "1 Karte, verwendet in der Sony ZV-E10 II.",
+      "es": "1 tarjeta, usada en la Sony ZV-E10 II."
+    },
     "image": "assets/img/products/sandisk-extreme-pro-512gb-v60.webp",
     "specs": {
       "Capacità": "512 GB",

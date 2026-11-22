@@ -1,12 +1,36 @@
 {
   "name": "Nathan Pollini",
-  "tagline": "Fotografo · Ticino, Svizzera",
-  "bio": "Foto e video di moto. Qui trovi Photocarcifo, il mio Instagram e l'attrezzatura che uso.",
-  "avatar": "assets/img/profile.svg",
-  "avatarAlt": "Foto profilo di Nathan Pollini",
+  "tagline": {
+    "it": "Fotografo · Ticino, Svizzera",
+    "en": "Photographer · Ticino, Switzerland",
+    "fr": "Photographe · Tessin, Suisse",
+    "de": "Fotograf · Tessin, Schweiz",
+    "es": "Fotógrafo · Tesino, Suiza"
+  },
+  "bio": {
+    "it": "Foto e video di moto. Qui trovi Photocarcifo, il mio Instagram e l'attrezzatura che uso.",
+    "en": "Motorcycle photo & video. Find Photocarcifo, my Instagram and the gear I use here.",
+    "fr": "Photo et vidéo de moto. Retrouve ici Photocarcifo, mon Instagram et le matériel que j'utilise.",
+    "de": "Motorrad-Foto und -Video. Hier findest du Photocarcifo, mein Instagram und die Ausrüstung, die ich benutze.",
+    "es": "Foto y vídeo de motos. Aquí encuentras Photocarcifo, mi Instagram y el equipo que uso."
+  },
+  "avatar": "assets/img/profile.webp",
+  "avatarAlt": {
+    "it": "Foto profilo di Nathan Pollini",
+    "en": "Profile photo of Nathan Pollini",
+    "fr": "Photo de profil de Nathan Pollini",
+    "de": "Profilfoto von Nathan Pollini",
+    "es": "Foto de perfil de Nathan Pollini"
+  },
   "social": [],
   "footer": {
-    "text": "Sito statico ospitato su GitHub Pages.",
+    "text": {
+      "it": "Sito statico ospitato su GitHub Pages.",
+      "en": "Static site hosted on GitHub Pages.",
+      "fr": "Site statique hébergé sur GitHub Pages.",
+      "de": "Statische Website, gehostet auf GitHub Pages.",
+      "es": "Sitio estático alojado en GitHub Pages."
+    },
     "links": [
       {
         "name": "Photocarcifo",

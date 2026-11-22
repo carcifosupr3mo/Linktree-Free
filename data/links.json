@@ -1,9 +1,21 @@
 {
   "featured": {
     "name": "Photocarcifo",
-    "description": "Il mio progetto fotografico",
+    "description": {
+      "it": "Il mio progetto fotografico",
+      "en": "My photography project",
+      "fr": "Mon projet photographique",
+      "de": "Mein Fotoprojekt",
+      "es": "Mi proyecto fotográfico"
+    },
     "icon": "assets/img/photocarcifo.svg",
-    "cta": "VISITA PHOTOCARCIFO",
+    "cta": {
+      "it": "VISITA PHOTOCARCIFO",
+      "en": "VISIT PHOTOCARCIFO",
+      "fr": "VISITER PHOTOCARCIFO",
+      "de": "PHOTOCARCIFO BESUCHEN",
+      "es": "VISITAR PHOTOCARCIFO"
+    },
     "url": "https://photocarcifo.ch"
   },
   "groups": [
@@ -20,8 +32,20 @@
           "order": 10
         },
         {
-          "name": "La mia attrezzatura",
-          "description": "Fotocamere, obiettivi e accessori che uso",
+          "name": {
+            "it": "La mia attrezzatura",
+            "en": "My gear",
+            "fr": "Mon matériel",
+            "de": "Meine Ausrüstung",
+            "es": "Mi equipo"
+          },
+          "description": {
+            "it": "Fotocamere, obiettivi e accessori che uso",
+            "en": "Cameras, lenses and accessories I use",
+            "fr": "Appareils photo, objectifs et accessoires que j'utilise",
+            "de": "Kameras, Objektive und Zubehör, die ich benutze",
+            "es": "Cámaras, objetivos y accesorios que uso"
+          },
           "icon": "camera",
           "url": "#equipment",
           "order": 20

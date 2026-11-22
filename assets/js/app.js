@@ -1,7 +1,7 @@
 'use strict';
 
 /* ===== Costanti ===== */
-const V = '20261122e';
+const V = '20261122g';
 const FALLBACK_IMG = 'assets/img/placeholders/other.svg';
 
 const P = {
@@ -26,7 +26,8 @@ const P = {
   external: '<path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
   zoom: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3M11 8v6M8 11h6"/>',
   sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
-  moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>'
+  moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
+  chevron: '<path d="m6 9 6 6 6-6"/>'
 };
 const icon = (name, cls = '') =>
   `<svg class="icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[name] || P.link}</svg>`;
@@ -51,6 +52,13 @@ async function getJSON(path) {
 }
 
 const state = { cats: [], items: [], q: '', cat: 'all' };
+let lang = DEFAULT_LANG;
+let DATA = null;
+/* testo dell'interfaccia */
+const t = (k, v = {}) => (UI[lang][k] ?? UI[DEFAULT_LANG][k] ?? k).replace(/\{(\w+)\}/g, (_, n) => v[n] ?? '');
+/* campo dei JSON: stringa semplice oppure oggetto { it, en, fr, de, es } */
+const tr = v => (v && typeof v === 'object') ? (v[lang] ?? v.en ?? v.it ?? Object.values(v)[0] ?? '') : (v ?? '');
+const specKey = k => (SPEC_KEYS[k] && SPEC_KEYS[k][lang]) || k;
 
 /* ===== Toast e copia ===== */
 let toastTimer;
@@ -67,22 +75,25 @@ async function copyText(text, btn) {
     try { document.execCommand('copy'); } catch { /* ignora */ }
     ta.remove();
   }
-  toast('Link copiato');
+  toast(t('copied'));
   if (btn) { btn.classList.add('done'); const o = btn.innerHTML; btn.innerHTML = icon('check'); setTimeout(() => { btn.innerHTML = o; btn.classList.remove('done'); }, 1500); }
 }
 const absUrl = u => new URL(u, location.href).href;
-const copyBtn = (url, label) => `<button class="icon-btn copy-btn" type="button" data-copy="${esc(url)}" aria-label="Copia il link di ${esc(label)}" title="Copia link">${icon('copy')}</button>`;
+const copyBtn = (url, label) => `<button class="icon-btn copy-btn" type="button" data-copy="${esc(url)}" aria-label="${esc(t('copy_link', { name: label }))}" title="${esc(t('copy_title'))}">${icon('copy')}</button>`;
 
 /* ===== Tema ===== */
 function setupTheme() {
+  window.__t = k => t(k);
   const btn = $('#theme-toggle'), meta = $('meta[name="theme-color"]');
   const apply = t => {
     document.documentElement.dataset.theme = t;
     btn.innerHTML = icon(t === 'dark' ? 'sun' : 'moon');
-    btn.setAttribute('aria-label', t === 'dark' ? 'Passa al tema chiaro' : 'Passa al tema scuro');
+    btn.setAttribute('aria-label', t === 'dark' ? window.__t('theme_light') : window.__t('theme_dark'));
+    btn.title = window.__t('theme_title');
     if (meta) meta.content = t === 'dark' ? '#0a0c14' : '#ffffff';
   };
   apply(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+  window.__refreshTheme = () => apply(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
   btn.addEventListener('click', () => {
     const t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     apply(t); try { localStorage.setItem('theme', t); } catch { /* ignora */ }
@@ -92,16 +103,16 @@ function setupTheme() {
 /* ===== Profilo, link, footer ===== */
 function renderProfile(p) {
   $('#name').textContent = p.name || '';
-  $('#tagline').textContent = p.tagline || '';
-  $('#bio').textContent = p.bio || '';
-  if (p.avatar) { const a = $('#avatar'); a.src = p.avatar; a.alt = p.avatarAlt || p.name || ''; }
+  $('#tagline').textContent = tr(p.tagline);
+  $('#bio').textContent = tr(p.bio);
+  if (p.avatar) { const a = $('#avatar'); if (!a.src.endsWith(p.avatar)) a.src = p.avatar; a.alt = tr(p.avatarAlt) || p.name || ''; }
   $('#social').hidden = !visible(p.social).length;
   $('#social').innerHTML = sorted(visible(p.social)).map(s =>
-    `<li><a href="${esc(safeUrl(s.url))}"${ext(s.url)} aria-label="${esc(s.name)}" title="${esc(s.name)}">${icon(s.icon)}</a></li>`).join('');
+    `<li><a href="${esc(safeUrl(s.url))}"${ext(s.url)} aria-label="${esc(tr(s.name))}" title="${esc(tr(s.name))}">${icon(s.icon)}</a></li>`).join('');
   const f = p.footer || {};
-  $('#footer-text').textContent = f.text || '';
+  $('#footer-text').textContent = tr(f.text);
   $('#footer-links').innerHTML = sorted(visible(f.links)).map(l =>
-    `<li><a href="${esc(safeUrl(l.url))}"${ext(l.url)}>${esc(l.name)}</a></li>`).join('');
+    `<li><a href="${esc(safeUrl(l.url))}"${ext(l.url)}>${esc(tr(l.name))}</a></li>`).join('');
   $('#year').textContent = new Date().getFullYear();
 }
 
@@ -112,53 +123,53 @@ function renderLinks(d) {
       <a class="featured-card" href="${esc(safeUrl(f.url))}"${ext(f.url)}>
         <div class="featured-head">
           <img class="featured-icon" src="${esc(f.icon || '')}" alt="" width="68" height="68" decoding="async">
-          <div><span class="eyebrow">Progetto principale</span><h2>${esc(f.name)}</h2><p>${esc(f.description)}</p></div>
+          <div><span class="eyebrow">${esc(t('featured'))}</span><h2>${esc(tr(f.name))}</h2><p>${esc(tr(f.description))}</p></div>
         </div>
-        <span class="btn btn-primary">${esc(f.cta || 'VISITA')} ${icon('arrow')}</span>
-      </a>${copyBtn(absUrl(f.url), f.name)}`;
+        <span class="btn btn-primary">${esc(tr(f.cta) || 'OK')} ${icon('arrow')}</span>
+      </a>${copyBtn(absUrl(f.url), tr(f.name))}`;
   }
   $('#links').innerHTML = sorted(visible(d.groups)).map((g, gi) => `
-    <section class="group"${g.title ? ` aria-labelledby="g-${esc(g.id)}"` : ' aria-label="Link"'}>
-      ${g.title ? `<h2 id="g-${esc(g.id)}">${esc(g.title)}</h2>` : ''}
+    <section class="group"${g.title ? ` aria-labelledby="g-${esc(g.id)}"` : ` aria-label="${esc(t('link_group'))}"`}>
+      ${g.title ? `<h2 id="g-${esc(g.id)}">${esc(tr(g.title))}</h2>` : ''}
       <ul class="link-list">${sorted(visible(g.items)).map((l, i) => `
         <li class="link-card rise" style="--i:${gi * 3 + i + 2}">
           <a class="link-main" href="${esc(safeUrl(l.url))}"${ext(l.url)}>
             <span class="link-ico">${iconOrImg(l.icon)}</span>
-            <span class="link-text"><strong>${esc(l.name)}${l.placeholder ? '<span class="tag">Esempio</span>' : ''}</strong><span>${esc(l.description)}</span></span>
-          </a>${copyBtn(absUrl(l.url), l.name)}
+            <span class="link-text"><strong>${esc(tr(l.name))}${l.placeholder ? `<span class="tag">${esc(t('example'))}</span>` : ''}</strong><span>${esc(tr(l.description))}</span></span>
+          </a>${copyBtn(absUrl(l.url), tr(l.name))}
         </li>`).join('')}
       </ul>
     </section>`).join('');
 }
 
 /* ===== Attrezzatura ===== */
-const catName = id => (state.cats.find(c => c.id === id) || {}).name || id;
+const catName = id => tr((state.cats.find(c => c.id === id) || {}).name) || id;
 const catIcon = id => (state.cats.find(c => c.id === id) || {}).icon || 'box';
 
 function matches(it) {
   if (state.cat !== 'all' && it.category !== state.cat) return false;
   if (!state.q) return true;
-  const hay = norm([it.name, it.brand, it.model, it.description, catName(it.category),
-    ...Object.entries(it.specs || {}).flat()].join(' '));
+  const hay = norm([tr(it.name), tr(it.brand), tr(it.model), tr(it.description), catName(it.category),
+    ...Object.entries(it.specs || {}).map(([k, v]) => `${specKey(k)} ${tr(v)}`)].join(' '));
   return norm(state.q).split(/\s+/).filter(Boolean).every(w => hay.includes(w));
 }
 
 function renderChips() {
   const count = id => state.items.filter(i => id === 'all' || i.category === id).length;
   const chip = (id, label) => `<button class="chip" type="button" data-cat="${esc(id)}" aria-pressed="${state.cat === id}">${esc(label)} <small>${count(id)}</small></button>`;
-  $('#chips').innerHTML = chip('all', 'Tutti') + state.cats.filter(c => count(c.id)).map(c => chip(c.id, c.name)).join('');
+  $('#chips').innerHTML = chip('all', t('all')) + state.cats.filter(c => count(c.id)).map(c => chip(c.id, tr(c.name))).join('');
 }
 
 function productCard(it, i) {
   const img = it.image || FALLBACK_IMG;
   return `
     <article class="product rise" style="--i:${Math.min(i, 10)}">
-      <div class="thumb"><img class="${img.includes('/placeholders/') ? 'is-ph' : ''}" src="${esc(img)}" alt="${esc(it.name)}" width="800" height="600" loading="lazy" decoding="async"></div>
+      <div class="thumb"><img class="${img.includes('/placeholders/') ? 'is-ph' : ''}" src="${esc(img)}" alt="${esc(tr(it.name))}" width="800" height="600" loading="lazy" decoding="async"></div>
       <div class="p-body">
-        ${it.placeholder ? '<div class="badges"><span class="badge ph">Placeholder</span></div>' : ''}
-        <span class="brand">${esc([it.brand, it.model].filter(Boolean).join(' · '))}</span>
-        <h3><button type="button" data-open="${esc(it.id)}" aria-haspopup="dialog">${esc(it.name)}</button></h3>
-        <p class="p-desc">${esc(it.description)}</p>
+        ${it.placeholder ? `<div class="badges"><span class="badge ph">${esc(t('placeholder'))}</span></div>` : ''}
+        <span class="brand">${esc([tr(it.brand), tr(it.model)].filter(Boolean).join(' · '))}</span>
+        <h3><button type="button" data-open="${esc(it.id)}" aria-haspopup="dialog">${esc(tr(it.name))}</button></h3>
+        <p class="p-desc">${esc(tr(it.description))}</p>
       </div>
     </article>`;
 }
@@ -166,9 +177,9 @@ function productCard(it, i) {
 function renderCatalog() {
   const list = state.items.filter(matches);
   $('#count').textContent = list.length === state.items.length
-    ? `${list.length} prodotti` : `${list.length} di ${state.items.length} prodotti`;
+    ? t('count_all', { n: list.length }) : t('count_some', { n: list.length, m: state.items.length });
   if (!list.length) {
-    $('#catalog').innerHTML = '<div class="empty"><strong>Nessun risultato</strong>Prova con un altro termine o rimuovi i filtri.</div>';
+    $('#catalog').innerHTML = `<div class="empty"><strong>${esc(t('empty_title'))}</strong>${esc(t('empty_text'))}</div>`;
     return;
   }
   const ids = [...state.cats.map(c => c.id), ...new Set(list.map(i => i.category))].filter((v, i, a) => a.indexOf(v) === i);
@@ -205,19 +216,19 @@ function openProduct(id, pushHash = true) {
   const specs = Object.entries(it.specs || {});
   const img = it.image || FALLBACK_IMG;
   pd().innerHTML = `
-    <button class="icon-btn pd-close" type="button" aria-label="Chiudi scheda" data-close>${icon('x')}</button>
-    <button class="pd-image" type="button" aria-label="Ingrandisci immagine di ${esc(it.name)}" data-zoom>
-      <img class="${img.includes('/placeholders/') ? 'is-ph' : ''}" src="${esc(img)}" alt="${esc(it.name)}" width="800" height="600" decoding="async">
-      <span class="pd-zoom">${icon('zoom')} Ingrandisci</span>
+    <button class="icon-btn pd-close" type="button" aria-label="${esc(t('close_card'))}" data-close>${icon('x')}</button>
+    <button class="pd-image" type="button" aria-label="${esc(t('enlarge_label', { name: tr(it.name) }))}" data-zoom>
+      <img class="${img.includes('/placeholders/') ? 'is-ph' : ''}" src="${esc(img)}" alt="${esc(tr(it.name))}" width="800" height="600" decoding="async">
+      <span class="pd-zoom">${icon('zoom')} ${esc(t('enlarge'))}</span>
     </button>
     <div class="pd-body">
-      <div class="badges"><span class="badge">${esc(catName(it.category))}</span>${it.placeholder ? '<span class="badge ph">Placeholder</span>' : ''}</div>
-      <div><span class="brand">${esc([it.brand, it.model].filter(Boolean).join(' · '))}</span><h2 id="pd-title">${esc(it.name)}</h2></div>
-      <p>${esc(it.description)}</p>
-      ${specs.length ? `<dl class="specs">${specs.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>` : ''}
+      <div class="badges"><span class="badge">${esc(catName(it.category))}</span>${it.placeholder ? `<span class="badge ph">${esc(t('placeholder'))}</span>` : ''}</div>
+      <div><span class="brand">${esc([tr(it.brand), tr(it.model)].filter(Boolean).join(' · '))}</span><h2 id="pd-title">${esc(tr(it.name))}</h2></div>
+      <p>${esc(tr(it.description))}</p>
+      ${specs.length ? `<dl class="specs">${specs.map(([k, v]) => `<dt>${esc(specKey(k))}</dt><dd>${esc(tr(v))}</dd>`).join('')}</dl>` : ''}
       <div class="pd-actions">
-        ${it.url ? `<a class="btn btn-primary" href="${esc(safeUrl(it.url))}"${ext(it.url)}>Sito del produttore ${icon('external')}</a>` : ''}
-        <button class="btn" type="button" data-copy-product>${icon('copy')} Copia link scheda</button>
+        ${it.url ? `<a class="btn btn-primary" href="${esc(safeUrl(it.url))}"${ext(it.url)}>${esc(t('maker_site'))} ${icon('external')}</a>` : ''}
+        <button class="btn" type="button" data-copy-product>${icon('copy')} ${esc(t('copy_card'))}</button>
       </div>
     </div>`;
   pd().dataset.id = id;
@@ -236,7 +247,7 @@ function setupDialogs() {
   $('#catalog').addEventListener('click', e => { const b = e.target.closest('[data-open]'); if (b) openProduct(b.dataset.open); });
   pd().addEventListener('click', e => {
     if (e.target === pd() || e.target.closest('[data-close]')) return pd().close();
-    if (e.target.closest('[data-zoom]')) { const it = state.items.find(i => i.id === pd().dataset.id); openLightbox(it.image || FALLBACK_IMG, it.name); }
+    if (e.target.closest('[data-zoom]')) { const it = state.items.find(i => i.id === pd().dataset.id); openLightbox(it.image || FALLBACK_IMG, tr(it.name)); }
     if (e.target.closest('[data-copy-product]')) copyText(location.origin + location.pathname + '#p=' + encodeURIComponent(pd().dataset.id), e.target.closest('button'));
   });
   pd().addEventListener('close', () => {
@@ -263,20 +274,74 @@ document.addEventListener('click', e => {
   const b = e.target.closest('[data-copy]'); if (b) copyText(b.dataset.copy, b);
 });
 
+/* ===== Lingua ===== */
+const flag = c => `<img src="assets/img/flags/${c}.svg" alt="" width="24" height="16" decoding="async">`;
+
+function applyStaticTexts() {
+  document.documentElement.lang = lang;
+  document.title = t('doc_title');
+  const md = $('meta[name="description"]'); if (md) md.content = t('doc_desc');
+  for (const el of document.querySelectorAll('[data-i18n]')) el.textContent = t(el.dataset.i18n);
+  for (const el of document.querySelectorAll('[data-i18n-attr]'))
+    for (const pair of el.dataset.i18nAttr.split(';')) { const [a, k] = pair.split(':'); el.setAttribute(a, t(k)); }
+  const cur = LANGS.find(l => l.code === lang);
+  $('#lang-btn').innerHTML = `${flag(lang)}<span class="lang-name">${esc(cur.name)}</span>${icon('chevron')}`;
+  $('#lang-btn').setAttribute('aria-label', `${t('lang_label')}: ${cur.name}`);
+  $('#lang-menu').setAttribute('aria-label', t('lang_label'));
+  $('#lang-menu').innerHTML = `<li class="lang-head" aria-hidden="true">${esc(t('lang_label'))}</li>` + LANGS.map(l => `<li><button type="button" class="lang-opt" data-lang="${l.code}" lang="${l.code}" aria-current="${l.code === lang}">${flag(l.code)}<span>${esc(l.name)}</span>${l.code === lang ? icon('check') : ''}</button></li>`).join('');
+  $('#lightbox [data-close]').setAttribute('aria-label', t('close_image'));
+  $('#lightbox').setAttribute('aria-label', t('lightbox'));
+  if (window.__refreshTheme) window.__refreshTheme();
+}
+
+function renderAll() {
+  applyStaticTexts();
+  renderProfile(DATA.profile); renderLinks(DATA.links);
+  renderChips(); renderCatalog();
+  if (pd().open) openProduct(pd().dataset.id, false);
+}
+
+function setLang(code) {
+  if (!LANGS.some(l => l.code === code) || code === lang) return;
+  lang = code;
+  try { localStorage.setItem('lang', code); } catch { /* ignora */ }
+  renderAll();
+}
+
+function setupLang() {
+  const btn = $('#lang-btn'), menu = $('#lang-menu');
+  const close = (focus) => { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); if (focus) btn.focus(); };
+  btn.addEventListener('click', () => {
+    const open = menu.hidden;
+    menu.hidden = !open; btn.setAttribute('aria-expanded', String(open));
+    if (open) (menu.querySelector('[aria-current="true"]') || menu.querySelector('button')).focus();
+  });
+  menu.addEventListener('click', e => { const b = e.target.closest('[data-lang]'); if (b) { setLang(b.dataset.lang); close(true); } });
+  menu.addEventListener('keydown', e => {
+    const items = [...menu.querySelectorAll('button')], i = items.indexOf(document.activeElement);
+    if (e.key === 'ArrowDown') { e.preventDefault(); items[(i + 1) % items.length].focus(); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.hidden) { e.stopPropagation(); close(true); } }, true);
+  document.addEventListener('click', e => { if (!menu.hidden && !e.target.closest('.lang')) close(false); });
+}
+
 async function init() {
+  lang = detectLang();
   setupTheme();
   try {
     const [profile, links, cats, items] = await Promise.all(
       ['profile', 'links', 'categories', 'equipment'].map(n => getJSON(`data/${n}.json`)));
+    DATA = { profile, links };
     state.cats = sorted(visible(cats));
     state.items = visible(items);
-    renderProfile(profile); renderLinks(links);
-    renderChips(); renderCatalog(); setupFilters(); setupDialogs();
+    setupLang(); setupFilters(); setupDialogs();
+    renderAll();
     window.addEventListener('hashchange', routeHash); routeHash();
     document.documentElement.dataset.ready = '1';
   } catch (err) {
     console.error(err);
-    $('#catalog').innerHTML = `<div class="error-box" role="alert"><strong>Impossibile caricare i contenuti.</strong><br>${esc(err.message)}<br>Se stai aprendo il file direttamente, avvia un server locale (es. <code>python3 -m http.server</code>).</div>`;
+    $('#catalog').innerHTML = `<div class="error-box" role="alert"><strong>${esc(t('error_title'))}</strong><br>${esc(err.message)}<br>${esc(t('error_hint'))}</div>`;
   }
 }
 init();
