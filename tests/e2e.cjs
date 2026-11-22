@@ -25,7 +25,7 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     const yF = (await p.locator('.featured-card').boundingBox()).y, yE = (await p.locator('#equipment').boundingBox()).y;
     ok(yF < yE && yF < (opts.viewport?.height || 900), 'card Photocarcifo prima e visibile above the fold');
     ok(await p.locator('.link-card').count() === 2, '2 card link da links.json');
-    ok(await p.locator('.product').count() === 11, '11 prodotti da equipment.json');
+    ok(await p.locator('.product').count() === 12, '12 prodotti da equipment.json');
     ok(await p.locator('.cat-block').count() === 4, '4 categorie con prodotti');
     ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'nessuno scroll orizzontale');
     // le immagini lazy si caricano solo in vista: porta ogni immagine in vista e attendi il caricamento
@@ -45,7 +45,7 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     await p.fill('#search', 'dji'); await p.waitForTimeout(300);
     ok(await p.locator('.product').count() === 4, 'ricerca "dji" → 4 risultati');
     await p.fill('#search', 'sandisk'); await p.waitForTimeout(300);
-    ok(await p.locator('.product').count() === 1, 'ricerca "sandisk" → 1 risultato');
+    ok(await p.locator('.product').count() === 2, 'ricerca "sandisk" → 2 risultati');
     await p.fill('#search', 'zzzz'); await p.waitForTimeout(300);
     ok(await p.locator('.empty').count() === 1, 'ricerca senza risultati → stato vuoto');
     await p.fill('#search', ''); await p.waitForTimeout(300);
@@ -59,7 +59,7 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     await p.selectOption('#status-filter', 'sold');
     ok(await p.locator('.product').count() === 0, 'stato "venduto" → 0');
     await p.selectOption('#status-filter', 'all');
-    ok(await p.locator('.product').count() === 11, 'reset filtri → 11');
+    ok(await p.locator('.product').count() === 12, 'reset filtri → 12');
 
     // scheda + lightbox + tastiera
     await p.locator('.product h3 button').nth(2).focus(); await p.keyboard.press('Enter');

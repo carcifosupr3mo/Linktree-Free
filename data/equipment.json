@@ -19,7 +19,7 @@
     "brand": "Nikon",
     "model": "D7200",
     "description": "",
-    "image": "assets/img/placeholders/camera.svg",
+    "image": "assets/img/products/nikon-d7200.webp",
     "specs": {},
     "status": "owned",
     "url": null,
@@ -32,7 +32,7 @@
     "brand": "Sony",
     "model": "E PZ 18-105mm f/4 G OSS",
     "description": "Usato con la Sony ZV-E10 II.",
-    "image": "assets/img/placeholders/lens.svg",
+    "image": "assets/img/products/sony-18-105-f4.webp",
     "specs": {
       "Focale": "18-105 mm",
       "Apertura": "f/4"
@@ -48,7 +48,7 @@
     "brand": "Nikon",
     "model": "AF-S DX 18-300mm f/3.5-6.3G ED",
     "description": "Usato con la Nikon D7200.",
-    "image": "assets/img/placeholders/lens.svg",
+    "image": "assets/img/products/nikon-af-s-dx-18-300.webp",
     "specs": {
       "Focale": "18-300 mm",
       "Apertura": "f/3.5-6.3"
@@ -56,21 +56,6 @@
     "status": "owned",
     "url": null,
     "order": 20
-  },
-  {
-    "id": "sandisk-sd-256gb",
-    "category": "accessories",
-    "name": "SanDisk SD 256 GB",
-    "brand": "SanDisk",
-    "model": "SD 256 GB",
-    "description": "3 schede: 2 nella Nikon D7200, 1 nella Sony ZV-E10 II (V60).",
-    "image": "assets/img/placeholders/accessory.svg",
-    "specs": {
-      "Capacità": "256 GB"
-    },
-    "status": "owned",
-    "url": null,
-    "order": 10
   },
   {
     "id": "kf-concept-nd2-nd400-72mm",
@@ -152,5 +137,38 @@
     "status": "owned",
     "url": null,
     "order": 30
+  },
+  {
+    "id": "sandisk-extreme-256gb-v30",
+    "category": "accessories",
+    "name": "SanDisk Extreme 256 GB V30",
+    "brand": "SanDisk",
+    "model": "Extreme 256 GB V30",
+    "description": "2 schede, usate nella Nikon D7200.",
+    "image": "assets/img/products/sandisk-extreme-256gb-v30.webp",
+    "specs": {
+      "Capacità": "256 GB",
+      "Classe di velocità": "V30 · U3 · A2"
+    },
+    "status": "owned",
+    "url": null,
+    "order": 10
+  },
+  {
+    "id": "sandisk-extreme-pro-512gb-v60",
+    "category": "accessories",
+    "name": "SanDisk Extreme PRO UHS-II 512 GB V60",
+    "brand": "SanDisk",
+    "model": "Extreme PRO UHS-II 512 GB V60",
+    "description": "1 scheda, usata nella Sony ZV-E10 II.",
+    "image": "assets/img/products/sandisk-extreme-pro-512gb-v60.webp",
+    "specs": {
+      "Capacità": "512 GB",
+      "Classe di velocità": "UHS-II · V60 · U3",
+      "Lettura / scrittura": "280 / 150 MB/s"
+    },
+    "status": "owned",
+    "url": null,
+    "order": 15
   }
 ]
