@@ -60,7 +60,7 @@
     "brand": "K&F Concept",
     "model": "ND2-ND400 variabile 72 mm",
     "description": "Filtro ND variabile, usato con il Sony 18-105mm f/4.",
-    "image": "assets/img/placeholders/accessory.svg",
+    "image": "assets/img/products/kf-concept-nd2-nd400-72mm.webp",
     "specs": {
       "Diametro": "72 mm",
       "Gradazione": "ND2-ND400 (1-9 stop)"
@@ -123,7 +123,7 @@
     "brand": "Falcam",
     "model": "#3141",
     "description": "Sgancio rapido per tracolla.",
-    "image": "assets/img/placeholders/accessory.svg",
+    "image": "assets/img/products/falcam-f38-sgancio-tracolla-v2.webp",
     "specs": {},
     "url": null,
     "order": 30
