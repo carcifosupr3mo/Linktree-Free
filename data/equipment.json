@@ -8,7 +8,6 @@
     "description": "",
     "image": "assets/img/products/sony-zv-e10-ii.webp",
     "specs": {},
-    "status": "owned",
     "url": null,
     "order": 10
   },
@@ -21,7 +20,6 @@
     "description": "",
     "image": "assets/img/products/nikon-d7200.webp",
     "specs": {},
-    "status": "owned",
     "url": null,
     "order": 20
   },
@@ -37,7 +35,6 @@
       "Focale": "18-105 mm",
       "Apertura": "f/4"
     },
-    "status": "owned",
     "url": null,
     "order": 10
   },
@@ -53,7 +50,6 @@
       "Focale": "18-300 mm",
       "Apertura": "f/3.5-6.3"
     },
-    "status": "owned",
     "url": null,
     "order": 20
   },
@@ -69,7 +65,6 @@
       "Diametro": "72 mm",
       "Gradazione": "ND2-ND400 (1-9 stop)"
     },
-    "status": "owned",
     "url": null,
     "order": 20
   },
@@ -82,7 +77,6 @@
     "description": "Gimbal.",
     "image": "assets/img/products/dji-rs4-mini-combo.webp",
     "specs": {},
-    "status": "owned",
     "url": null,
     "order": 10
   },
@@ -95,7 +89,6 @@
     "description": "Kit con 2 trasmettitori, 1 ricevitore e custodia di ricarica.",
     "image": "assets/img/products/dji-mic-mini.webp",
     "specs": {},
-    "status": "owned",
     "url": null,
     "order": 20
   },
@@ -108,7 +101,6 @@
     "description": "Kit a sgancio rapido per il gimbal DJI RS 4 Mini.",
     "image": "assets/img/products/falcam-f38-quick-release-rs4-mini.webp",
     "specs": {},
-    "status": "owned",
     "url": null,
     "order": 30
   },
@@ -121,7 +113,6 @@
     "description": "Tracolla per stabilizzatori DJI.",
     "image": "assets/img/products/smallrig-shoulder-strap-4118b.webp",
     "specs": {},
-    "status": "owned",
     "url": null,
     "order": 40
   },
@@ -134,7 +125,6 @@
     "description": "Sgancio rapido per tracolla.",
     "image": "assets/img/placeholders/accessory.svg",
     "specs": {},
-    "status": "owned",
     "url": null,
     "order": 30
   },
@@ -150,7 +140,6 @@
       "Capacità": "256 GB",
       "Classe di velocità": "V30 · U3 · A2"
     },
-    "status": "owned",
     "url": null,
     "order": 10
   },
@@ -167,7 +156,6 @@
       "Classe di velocità": "UHS-II · V60 · U3",
       "Lettura / scrittura": "280 / 150 MB/s"
     },
-    "status": "owned",
     "url": null,
     "order": 15
   }

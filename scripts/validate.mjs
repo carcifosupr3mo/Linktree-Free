@@ -29,7 +29,6 @@ if (cats && eq) {
     ids.add(it.id);
     if (!/^[a-z0-9-]+$/.test(it.id)) errors.push(`id "${it.id}": usa solo minuscole, numeri e trattini`);
     if (!catIds.has(it.category)) errors.push(`prodotto "${it.id}": categoria sconosciuta "${it.category}"`);
-    if (!['owned', 'sold', 'incoming'].includes(it.status)) errors.push(`prodotto "${it.id}": status non valido "${it.status}" (owned|sold|incoming)`);
     if (!it.name) errors.push(`prodotto "${it.id}": name mancante`);
     img(it.image, `prodotto "${it.id}"`);
     if (it.placeholder) warnings.push(`prodotto "${it.id}" è ancora un placeholder`);

@@ -1,7 +1,6 @@
 'use strict';
 
 /* ===== Costanti ===== */
-const STATUS = { owned: 'Posseduto', sold: 'Venduto', incoming: 'In arrivo' };
 const FALLBACK_IMG = 'assets/img/placeholders/other.svg';
 
 const P = {
@@ -50,7 +49,7 @@ async function getJSON(path) {
   return r.json();
 }
 
-const state = { cats: [], items: [], q: '', cat: 'all', status: 'all' };
+const state = { cats: [], items: [], q: '', cat: 'all' };
 
 /* ===== Toast e copia ===== */
 let toastTimer;
@@ -136,9 +135,8 @@ const catIcon = id => (state.cats.find(c => c.id === id) || {}).icon || 'box';
 
 function matches(it) {
   if (state.cat !== 'all' && it.category !== state.cat) return false;
-  if (state.status !== 'all' && it.status !== state.status) return false;
   if (!state.q) return true;
-  const hay = norm([it.name, it.brand, it.model, it.description, catName(it.category), STATUS[it.status],
+  const hay = norm([it.name, it.brand, it.model, it.description, catName(it.category),
     ...Object.entries(it.specs || {}).flat()].join(' '));
   return norm(state.q).split(/\s+/).filter(Boolean).every(w => hay.includes(w));
 }
@@ -152,10 +150,10 @@ function renderChips() {
 function productCard(it, i) {
   const img = it.image || FALLBACK_IMG;
   return `
-    <article class="product rise ${it.status === 'sold' ? 'sold' : ''}" style="--i:${Math.min(i, 10)}">
+    <article class="product rise" style="--i:${Math.min(i, 10)}">
       <div class="thumb"><img class="${img.includes('/placeholders/') ? 'is-ph' : ''}" src="${esc(img)}" alt="${esc(it.name)}" width="800" height="600" loading="lazy" decoding="async"></div>
       <div class="p-body">
-        <div class="badges"><span class="badge st-${esc(it.status)}">${esc(STATUS[it.status] || it.status)}</span>${it.placeholder ? '<span class="badge ph">Placeholder</span>' : ''}</div>
+        ${it.placeholder ? '<div class="badges"><span class="badge ph">Placeholder</span></div>' : ''}
         <span class="brand">${esc([it.brand, it.model].filter(Boolean).join(' · '))}</span>
         <h3><button type="button" data-open="${esc(it.id)}" aria-haspopup="dialog">${esc(it.name)}</button></h3>
         <p class="p-desc">${esc(it.description)}</p>
@@ -185,7 +183,6 @@ function renderCatalog() {
 function setupFilters() {
   let timer;
   $('#search').addEventListener('input', e => { clearTimeout(timer); timer = setTimeout(() => { state.q = e.target.value.trim(); renderCatalog(); }, 120); });
-  $('#status-filter').addEventListener('change', e => { state.status = e.target.value; renderCatalog(); });
   $('#chips').addEventListener('click', e => {
     const b = e.target.closest('[data-cat]'); if (!b) return;
     state.cat = b.dataset.cat; renderChips(); renderCatalog();
@@ -212,7 +209,7 @@ function openProduct(id, pushHash = true) {
       <span class="pd-zoom">${icon('zoom')} Ingrandisci</span>
     </button>
     <div class="pd-body">
-      <div class="badges"><span class="badge st-${esc(it.status)}">${esc(STATUS[it.status] || it.status)}</span><span class="badge">${esc(catName(it.category))}</span>${it.placeholder ? '<span class="badge ph">Placeholder</span>' : ''}</div>
+      <div class="badges"><span class="badge">${esc(catName(it.category))}</span>${it.placeholder ? '<span class="badge ph">Placeholder</span>' : ''}</div>
       <div><span class="brand">${esc([it.brand, it.model].filter(Boolean).join(' · '))}</span><h2 id="pd-title">${esc(it.name)}</h2></div>
       <p>${esc(it.description)}</p>
       ${specs.length ? `<dl class="specs">${specs.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>` : ''}

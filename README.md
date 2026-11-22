@@ -49,7 +49,6 @@ node scripts/validate.mjs      # controlla i JSON
   "description": "La mia fotocamera principale.",
   "image": "assets/img/products/sony-a7iv.webp",
   "specs": { "Sensore": "Full frame 33 MP" },
-  "status": "owned",
   "url": "https://www.sony.ch/",
   "order": 10
 }
@@ -59,7 +58,6 @@ node scripts/validate.mjs      # controlla i JSON
 |---|---|
 | `id` | univoco, solo minuscole/numeri/trattini (usato nel link diretto `#p=id`) |
 | `category` | un `id` presente in `categories.json` |
-| `status` | `owned` (posseduto) · `sold` (venduto) · `incoming` (in arrivo) |
 | `order` | numero: più basso = prima, dentro la categoria |
 | `url` | sito del produttore, oppure `null` |
 | `enabled` | `false` per nascondere senza cancellare |

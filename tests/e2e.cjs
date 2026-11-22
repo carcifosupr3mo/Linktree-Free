@@ -26,6 +26,7 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     ok(yF < yE && yF < (opts.viewport?.height || 900), 'card Photocarcifo prima e visibile above the fold');
     ok(await p.locator('.link-card').count() === 2, '2 card link da links.json');
     ok(await p.locator('.product').count() === 12, '12 prodotti da equipment.json');
+    ok(!(await p.locator('body').innerText()).match(/posseduto|venduto|in arrivo/i), 'nessuna etichetta di stato visibile');
     ok(await p.locator('.cat-block').count() === 4, '4 categorie con prodotti');
     ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'nessuno scroll orizzontale');
     // le immagini lazy si caricano solo in vista: porta ogni immagine in vista e attendi il caricamento
@@ -53,12 +54,7 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     await p.click('.chip[data-cat="cameras"]');
     ok(await p.locator('.product').count() === 2, 'filtro Fotocamere → 2');
     ok(await p.locator('.chip[data-cat="cameras"]').getAttribute('aria-pressed') === 'true', 'chip attivo aria-pressed');
-    await p.selectOption('#status-filter', 'incoming');
-    ok(await p.locator('.product').count() === 0, 'categoria + stato "in arrivo" → 0');
-    await p.selectOption('#status-filter', 'all'); await p.click('.chip[data-cat="all"]');
-    await p.selectOption('#status-filter', 'sold');
-    ok(await p.locator('.product').count() === 0, 'stato "venduto" → 0');
-    await p.selectOption('#status-filter', 'all');
+    await p.click('.chip[data-cat="all"]');
     ok(await p.locator('.product').count() === 12, 'reset filtri → 12');
 
     // scheda + lightbox + tastiera
