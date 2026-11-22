@@ -1,0 +1,19 @@
+{
+  "name": "Nathan Pollini",
+  "tagline": "Fotografia · Video · Tecnologia",
+  "bio": "Qui trovi il mio progetto fotografico, i miei link e l'attrezzatura che uso.",
+  "avatar": "assets/img/profile.svg",
+  "avatarAlt": "Foto profilo di Nathan Pollini",
+  "social": [
+    { "name": "Instagram", "icon": "instagram", "url": "https://www.instagram.com/", "order": 10 },
+    { "name": "GitHub", "icon": "github", "url": "https://github.com/", "order": 20 },
+    { "name": "Email", "icon": "mail", "url": "mailto:tua-email@example.com", "order": 30 }
+  ],
+  "footer": {
+    "text": "Sito statico ospitato su GitHub Pages. I contenuti sono gestiti da file JSON.",
+    "links": [
+      { "name": "Photocarcifo", "url": "https://photocarcifo.ch", "order": 10 },
+      { "name": "GitHub", "url": "https://github.com/", "order": 20 }
+    ]
+  }
+}

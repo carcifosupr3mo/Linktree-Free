@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="it" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Nathan Pollini · Gear — Attrezzatura e link</title>
+  <meta name="description" content="Il mio progetto Photocarcifo, i miei link e tutta l'attrezzatura fotografica, video e tecnologica che uso: fotocamere, obiettivi, droni e altro.">
+  <meta name="author" content="Nathan Pollini">
+  <meta name="theme-color" content="#09090b">
+  <link rel="canonical" href="https://gear.photocarcifo.ch/">
+
+  <!-- Open Graph / Twitter (i social non eseguono JavaScript: questi tag restano statici) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nathan Pollini · Gear">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:title" content="Nathan Pollini · Gear">
+  <meta property="og:description" content="Photocarcifo, link personali e la mia attrezzatura fotografica e tecnologica.">
+  <meta property="og:url" content="https://gear.photocarcifo.ch/">
+  <meta property="og:image" content="https://gear.photocarcifo.ch/assets/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nathan Pollini · Gear">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nathan Pollini · Gear">
+  <meta name="twitter:description" content="Photocarcifo, link personali e la mia attrezzatura fotografica e tecnologica.">
+  <meta name="twitter:image" content="https://gear.photocarcifo.ch/assets/img/og.png">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Nathan Pollini","url":"https://gear.photocarcifo.ch/","sameAs":["https://photocarcifo.ch"]}
+  </script>
+
+  <script>
+    /* Applica il tema prima del rendering per evitare lampeggiamenti. Default: scuro. */
+    try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="preload" href="data/profile.json" as="fetch" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Vai al contenuto</a>
+
+  <button id="theme-toggle" class="icon-btn theme-toggle" type="button" aria-label="Passa al tema chiaro" title="Cambia tema"></button>
+
+  <main id="main">
+    <div class="narrow">
+      <header class="profile" id="profile">
+        <img id="avatar" class="avatar" src="assets/img/profile.svg" alt="Foto profilo di Nathan Pollini" width="112" height="112" decoding="async">
+        <h1 id="name">Nathan Pollini</h1>
+        <p id="tagline" class="tagline"></p>
+        <p id="bio" class="bio"></p>
+        <ul id="social" class="social" aria-label="Social"></ul>
+      </header>
+
+      <section id="featured" class="featured" aria-label="Progetto principale"></section>
+      <div id="links"></div>
+    </div>
+
+    <section id="equipment" class="wide" aria-labelledby="equipment-title">
+      <div class="section-head">
+        <h2 id="equipment-title">La mia attrezzatura</h2>
+        <p class="muted">Fotocamere, obiettivi, accessori, video, droni e tecnologia.</p>
+      </div>
+
+      <div class="toolbar" role="search">
+        <div class="search">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="search" type="search" placeholder="Cerca marca, modello, specifiche…" aria-label="Cerca nell'attrezzatura" autocomplete="off" spellcheck="false">
+          <kbd aria-hidden="true">/</kbd>
+        </div>
+        <label class="select">
+          <span class="sr-only">Filtra per stato</span>
+          <select id="status-filter">
+            <option value="all">Tutti gli stati</option>
+            <option value="owned">Posseduto</option>
+            <option value="incoming">In arrivo</option>
+            <option value="sold">Venduto</option>
+          </select>
+        </label>
+      </div>
+      <div id="chips" class="chips" role="group" aria-label="Filtra per categoria"></div>
+      <p id="count" class="muted count" role="status" aria-live="polite"></p>
+      <div id="catalog"></div>
+    </section>
+
+    <noscript><p class="noscript">Questo sito richiede JavaScript per mostrare i contenuti. Visita <a href="https://photocarcifo.ch">photocarcifo.ch</a>.</p></noscript>
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="narrow">
+      <p>© <span id="year">2026</span> Nathan Pollini</p>
+      <ul id="footer-links" class="footer-links"></ul>
+      <p id="footer-text" class="muted small"></p>
+    </div>
+  </footer>
+
+  <dialog id="product-dialog" class="dialog" aria-labelledby="pd-title"></dialog>
+  <dialog id="lightbox" class="lightbox" aria-label="Immagine ingrandita">
+    <button class="icon-btn lb-close" type="button" aria-label="Chiudi immagine" data-close></button>
+    <img alt="">
+    <p class="lb-caption"></p>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
