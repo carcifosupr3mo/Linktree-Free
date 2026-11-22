@@ -1,19 +1,36 @@
 {
   "name": "Nathan Pollini",
-  "tagline": "Fotografia · Video · Tecnologia",
-  "bio": "Qui trovi il mio progetto fotografico, i miei link e l'attrezzatura che uso.",
+  "tagline": "Fotografia",
+  "bio": "Fotografo. Qui trovi Photocarcifo, il mio Instagram e l'attrezzatura che uso per scattare.",
   "avatar": "assets/img/profile.svg",
   "avatarAlt": "Foto profilo di Nathan Pollini",
   "social": [
-    { "name": "Instagram", "icon": "instagram", "url": "https://www.instagram.com/", "order": 10 },
-    { "name": "GitHub", "icon": "github", "url": "https://github.com/", "order": 20 },
-    { "name": "Email", "icon": "mail", "url": "mailto:tua-email@example.com", "order": 30 }
+    {
+      "name": "Instagram",
+      "icon": "instagram",
+      "url": "https://www.instagram.com/photocarcifo/",
+      "order": 10
+    },
+    {
+      "name": "Email",
+      "icon": "mail",
+      "url": "mailto:info@photocarcifo.ch",
+      "order": 20
+    }
   ],
   "footer": {
-    "text": "Sito statico ospitato su GitHub Pages. I contenuti sono gestiti da file JSON.",
+    "text": "Sito statico ospitato su GitHub Pages.",
     "links": [
-      { "name": "Photocarcifo", "url": "https://photocarcifo.ch", "order": 10 },
-      { "name": "GitHub", "url": "https://github.com/", "order": 20 }
+      {
+        "name": "Photocarcifo",
+        "url": "https://photocarcifo.ch",
+        "order": 10
+      },
+      {
+        "name": "Instagram",
+        "url": "https://www.instagram.com/photocarcifo/",
+        "order": 20
+      }
     ]
   }
 }

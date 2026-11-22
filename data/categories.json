@@ -1,9 +1,26 @@
 [
-  { "id": "cameras",   "name": "Fotocamere",            "icon": "camera",   "order": 10 },
-  { "id": "lenses",    "name": "Obiettivi",             "icon": "lens",     "order": 20 },
-  { "id": "accessories","name": "Accessori fotografici","icon": "tripod",   "order": 30 },
-  { "id": "video",     "name": "Attrezzatura video",    "icon": "video",    "order": 40 },
-  { "id": "drones",    "name": "Droni",                 "icon": "drone",    "order": 50 },
-  { "id": "computing", "name": "Computer e tecnologia", "icon": "laptop",   "order": 60 },
-  { "id": "other",     "name": "Altro",                 "icon": "box",      "order": 70 }
+  {
+    "id": "cameras",
+    "name": "Fotocamere",
+    "icon": "camera",
+    "order": 10
+  },
+  {
+    "id": "lenses",
+    "name": "Obiettivi",
+    "icon": "lens",
+    "order": 20
+  },
+  {
+    "id": "accessories",
+    "name": "Accessori fotografici",
+    "icon": "tripod",
+    "order": 30
+  },
+  {
+    "id": "video",
+    "name": "Attrezzatura video",
+    "icon": "video",
+    "order": 40
+  }
 ]

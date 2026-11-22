@@ -9,14 +9,23 @@
   "groups": [
     {
       "id": "social",
-      "title": "Social e link",
+      "title": "Social e contatti",
       "order": 10,
       "items": [
-        { "name": "Instagram", "description": "Foto e storie quotidiane", "icon": "instagram", "url": "https://www.instagram.com/", "order": 10, "placeholder": true },
-        { "name": "GitHub", "description": "Codice e progetti open source", "icon": "github", "url": "https://github.com/", "order": 20, "placeholder": true },
-        { "name": "Sito personale", "description": "Un altro mio sito", "icon": "globe", "url": "https://example.com", "order": 30, "placeholder": true },
-        { "name": "Contatti", "description": "Scrivimi una email", "icon": "mail", "url": "mailto:tua-email@example.com", "order": 40, "placeholder": true },
-        { "name": "Altri progetti", "description": "Collegamento a un progetto", "icon": "folder", "url": "https://example.com/progetti", "order": 50, "placeholder": true }
+        {
+          "name": "Instagram",
+          "description": "@photocarcifo",
+          "icon": "instagram",
+          "url": "https://www.instagram.com/photocarcifo/",
+          "order": 10
+        },
+        {
+          "name": "Contatti",
+          "description": "info@photocarcifo.ch",
+          "icon": "mail",
+          "url": "mailto:info@photocarcifo.ch",
+          "order": 20
+        }
       ]
     }
   ]

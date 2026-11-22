@@ -24,9 +24,9 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     ok(await p.locator('.featured-card').getAttribute('href') === 'https://photocarcifo.ch', 'link Photocarcifo corretto');
     const yF = (await p.locator('.featured-card').boundingBox()).y, yE = (await p.locator('#equipment').boundingBox()).y;
     ok(yF < yE && yF < (opts.viewport?.height || 900), 'card Photocarcifo prima e visibile above the fold');
-    ok(await p.locator('.link-card').count() === 5, '5 card link da links.json');
-    ok(await p.locator('.product').count() === 9, '9 prodotti da equipment.json');
-    ok(await p.locator('.cat-block').count() === 7, '7 categorie con prodotti');
+    ok(await p.locator('.link-card').count() === 2, '2 card link da links.json');
+    ok(await p.locator('.product').count() === 6, '6 prodotti da equipment.json');
+    ok(await p.locator('.cat-block').count() === 4, '4 categorie con prodotti');
     ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'nessuno scroll orizzontale');
     // le immagini lazy si caricano solo in vista: porta ogni immagine in vista e attendi il caricamento
     await p.evaluate(async () => {
@@ -42,8 +42,8 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     ok(imgs === 0, 'tutte le immagini caricate');
 
     // ricerca
-    await p.fill('#search', 'drone'); await p.waitForTimeout(300);
-    ok(await p.locator('.product').count() === 1, 'ricerca "drone" → 1 risultato');
+    await p.fill('#search', 'video'); await p.waitForTimeout(300);
+    ok(await p.locator('.product').count() === 1, 'ricerca "video" → 1 risultato');
     await p.fill('#search', 'obiettivo'); await p.waitForTimeout(300);
     ok(await p.locator('.product').count() === 2, 'ricerca "obiettivo" → 2 risultati');
     await p.fill('#search', 'zzzz'); await p.waitForTimeout(300);
@@ -59,7 +59,7 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     await p.selectOption('#status-filter', 'sold');
     ok(await p.locator('.product').count() === 1, 'stato "venduto" → 1');
     await p.selectOption('#status-filter', 'all');
-    ok(await p.locator('.product').count() === 9, 'reset filtri → 9');
+    ok(await p.locator('.product').count() === 6, 'reset filtri → 6');
 
     // scheda + lightbox + tastiera
     await p.locator('.product h3 button').first().focus(); await p.keyboard.press('Enter');
@@ -97,8 +97,8 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     if (SHOTS) { await p.waitForTimeout(800); await p.screenshot({ path: `${SHOTS}/${name.split(' ')[0]}-dark.png`, fullPage: true }); }
 
     // deep link
-    await p.goto(BASE + '/#p=esempio-drone-1'); await p.waitForSelector('#product-dialog[open]');
-    ok(await p.locator('#pd-title').innerText() === 'Drone di esempio', 'deep link apre la scheda');
+    await p.goto(BASE + '/#p=esempio-video-1'); await p.waitForSelector('#product-dialog[open]');
+    ok(await p.locator('#pd-title').innerText() === 'Attrezzatura video di esempio', 'deep link apre la scheda');
 
     ok(bad.length === 0, 'nessuna risposta HTTP >= 400' + (bad.length ? ' ' + bad : ''));
     ok(errs.length === 0, 'nessun errore in console' + (errs.length ? ' ' + errs : ''));
