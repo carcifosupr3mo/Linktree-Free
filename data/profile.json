@@ -4,20 +4,7 @@
   "bio": "Foto e video di moto. Qui trovi Photocarcifo, il mio Instagram e l'attrezzatura che uso.",
   "avatar": "assets/img/profile.svg",
   "avatarAlt": "Foto profilo di Nathan Pollini",
-  "social": [
-    {
-      "name": "Instagram",
-      "icon": "instagram",
-      "url": "https://www.instagram.com/photocarcifo/",
-      "order": 10
-    },
-    {
-      "name": "Email",
-      "icon": "mail",
-      "url": "mailto:info@photocarcifo.ch",
-      "order": 20
-    }
-  ],
+  "social": [],
   "footer": {
     "text": "Sito statico ospitato su GitHub Pages.",
     "links": [

@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="it" data-theme="dark">
+<html lang="it" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Nathan Pollini · Gear — Attrezzatura fotografica</title>
   <meta name="description" content="Photocarcifo, il mio Instagram e l'attrezzatura fotografica e video che uso: fotocamere, obiettivi e accessori.">
   <meta name="author" content="Nathan Pollini">
-  <meta name="theme-color" content="#09090b">
+  <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="https://gear.photocarcifo.ch/">
 
   <!-- Open Graph / Twitter (i social non eseguono JavaScript: questi tag restano statici) -->
@@ -34,34 +34,50 @@
   </script>
 
   <script>
-    /* Applica il tema prima del rendering per evitare lampeggiamenti. Default: scuro. */
+    /* Applica il tema salvato prima del rendering per evitare lampeggiamenti. Default: chiaro. */
     try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
   </script>
   <link rel="preload" href="data/profile.json" as="fetch" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/app.js" defer></script>
+  <link rel="stylesheet" href="assets/css/style.css?v=20261122b">
+  <script src="assets/js/app.js?v=20261122b" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Vai al contenuto</a>
 
-  <button id="theme-toggle" class="icon-btn theme-toggle" type="button" aria-label="Passa al tema chiaro" title="Cambia tema"></button>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="#top" aria-label="Nathan Pollini · Gear">Nathan Pollini</a>
+      <nav class="nav" aria-label="Navigazione principale">
+        <a class="hide-sm" href="#equipment">Attrezzatura</a>
+        <a class="nav-cta" href="https://photocarcifo.ch" target="_blank" rel="noopener noreferrer">Photocarcifo</a>
+        <button id="theme-toggle" class="icon-btn theme-toggle" type="button" aria-label="Passa al tema scuro" title="Cambia tema"></button>
+      </nav>
+    </div>
+  </header>
 
   <main id="main">
-    <div class="narrow">
-      <header class="profile" id="profile">
-        <img id="avatar" class="avatar" src="assets/img/profile.svg" alt="Foto profilo di Nathan Pollini" width="112" height="112" decoding="async">
-        <h1 id="name">Nathan Pollini</h1>
-        <p id="tagline" class="tagline"></p>
-        <p id="bio" class="bio"></p>
-        <ul id="social" class="social" aria-label="Social"></ul>
-      </header>
+    <div id="top" class="hero">
+      <div class="container">
+        <header class="profile" id="profile">
+          <img id="avatar" class="avatar" src="assets/img/profile.svg" alt="Foto profilo di Nathan Pollini" width="140" height="140" decoding="async">
+          <div>
+            <p id="tagline" class="tagline"></p>
+            <h1 id="name">Nathan Pollini</h1>
+            <p id="bio" class="bio"></p>
+            <ul id="social" class="social" aria-label="Social"></ul>
+          </div>
+        </header>
+      </div>
+    </div>
 
+    <div class="container section">
       <section id="featured" class="featured" aria-label="Progetto principale"></section>
       <div id="links"></div>
     </div>
 
-    <section id="equipment" class="wide" aria-labelledby="equipment-title">
+    <section id="equipment" class="container" aria-labelledby="equipment-title">
       <div class="section-head">
+        <span class="eyebrow blue">Catalogo</span>
         <h2 id="equipment-title">La mia attrezzatura</h2>
         <p class="muted">Fotocamere, obiettivi, accessori e attrezzatura video.</p>
       </div>
@@ -72,8 +88,8 @@
           <input id="search" type="search" placeholder="Cerca marca, modello, specifiche…" aria-label="Cerca nell'attrezzatura" autocomplete="off" spellcheck="false">
           <kbd aria-hidden="true">/</kbd>
         </div>
+        <div id="chips" class="chips" role="group" aria-label="Filtra per categoria"></div>
       </div>
-      <div id="chips" class="chips" role="group" aria-label="Filtra per categoria"></div>
       <p id="count" class="muted count" role="status" aria-live="polite"></p>
       <div id="catalog"></div>
     </section>
@@ -82,7 +98,7 @@
   </main>
 
   <footer id="footer" class="footer">
-    <div class="narrow">
+    <div class="container">
       <p>© <span id="year">2026</span> Nathan Pollini</p>
       <ul id="footer-links" class="footer-links"></ul>
       <p id="footer-text" class="muted small"></p>

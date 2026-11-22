@@ -19,14 +19,14 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     await p.goto(BASE + '/'); await p.waitForSelector('html[data-ready]');
     await p.waitForTimeout(900);
 
-    ok(await p.locator('h1').innerText() === 'Nathan Pollini', 'nome profilo da profile.json');
+    ok(await p.locator('h1').textContent() === 'Nathan Pollini', 'nome profilo da profile.json');
     ok(await p.locator('.featured-card .btn').innerText().then(t => t.includes('VISITA PHOTOCARCIFO')), 'CTA VISITA PHOTOCARCIFO');
     ok(await p.locator('.featured-card').getAttribute('href') === 'https://photocarcifo.ch', 'link Photocarcifo corretto');
     const yF = (await p.locator('.featured-card').boundingBox()).y, yE = (await p.locator('#equipment').boundingBox()).y;
     ok(yF < yE && yF < (opts.viewport?.height || 900), 'card Photocarcifo prima e visibile above the fold');
-    ok(await p.locator('.link-card').count() === 2, '2 card link da links.json');
+    ok(await p.locator('.link-card').count() === 1, '1 card link da links.json');
     ok(await p.locator('.product').count() === 12, '12 prodotti da equipment.json');
-    ok(!(await p.locator('body').innerText()).match(/posseduto|venduto|in arrivo/i), 'nessuna etichetta di stato visibile');
+    ok(!(await p.locator('body').innerText()).match(/posseduto|venduto|in arrivo|info@photocarcifo|contatti/i), 'nessuna etichetta di stato né contatti visibili');
     ok(await p.locator('.cat-block').count() === 4, '4 categorie con prodotti');
     ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'nessuno scroll orizzontale');
     // le immagini lazy si caricano solo in vista: porta ogni immagine in vista e attendi il caricamento
@@ -60,7 +60,7 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     // scheda + lightbox + tastiera
     await p.locator('.product h3 button').nth(2).focus(); await p.keyboard.press('Enter');
     await p.waitForSelector('#product-dialog[open]');
-    ok(await p.locator('#pd-title').innerText() === 'Sony E PZ 18-105mm f/4 G OSS', 'scheda prodotto aperta da tastiera');
+    ok(await p.locator('#pd-title').textContent() === 'Sony E PZ 18-105mm f/4 G OSS', 'scheda prodotto aperta da tastiera');
     ok(p.url().includes('#p=sony-18-105-f4'), 'deep link #p= impostato');
     ok(await p.locator('#product-dialog .specs dt').count() === 2, 'specifiche mostrate');
     await p.click('[data-zoom]'); await p.waitForSelector('#lightbox[open]');
@@ -79,21 +79,21 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     ok((await p.evaluate(() => navigator.clipboard.readText())).startsWith('https://photocarcifo.ch'), 'pulsante copia link Photocarcifo');
 
     // tema
-    ok(await p.evaluate(() => document.documentElement.dataset.theme) === 'dark', 'tema scuro di default');
+    ok(await p.evaluate(() => document.documentElement.dataset.theme) === 'light', 'tema chiaro di default');
     await p.click('#theme-toggle');
-    ok(await p.evaluate(() => document.documentElement.dataset.theme) === 'light', 'cambio a tema chiaro');
+    ok(await p.evaluate(() => document.documentElement.dataset.theme) === 'dark', 'cambio a tema scuro');
     await p.waitForTimeout(600); // transizione tema
     const bg = await p.evaluate(() => getComputedStyle(document.body).backgroundColor);
-    ok(bg === 'rgb(245, 245, 247)', 'sfondo chiaro applicato (' + bg + ')');
+    ok(bg === 'rgb(10, 12, 20)', 'sfondo scuro applicato (' + bg + ')');
     await p.reload(); await p.waitForSelector('html[data-ready]');
-    ok(await p.evaluate(() => document.documentElement.dataset.theme) === 'light', 'tema persistente dopo reload');
-    if (SHOTS) { await p.waitForTimeout(800); await p.screenshot({ path: `${SHOTS}/${name.split(' ')[0]}-light.png`, fullPage: true }); }
-    await p.click('#theme-toggle');
+    ok(await p.evaluate(() => document.documentElement.dataset.theme) === 'dark', 'tema persistente dopo reload');
     if (SHOTS) { await p.waitForTimeout(800); await p.screenshot({ path: `${SHOTS}/${name.split(' ')[0]}-dark.png`, fullPage: true }); }
+    await p.click('#theme-toggle');
+    if (SHOTS) { await p.waitForTimeout(800); await p.screenshot({ path: `${SHOTS}/${name.split(' ')[0]}-light.png`, fullPage: true }); }
 
     // deep link
     await p.goto(BASE + '/#p=dji-mic-mini'); await p.waitForSelector('#product-dialog[open]');
-    ok(await p.locator('#pd-title').innerText() === 'DJI Mic Mini', 'deep link apre la scheda');
+    ok(await p.locator('#pd-title').textContent() === 'DJI Mic Mini', 'deep link apre la scheda');
 
     ok(bad.length === 0, 'nessuna risposta HTTP >= 400' + (bad.length ? ' ' + bad : ''));
     ok(errs.length === 0, 'nessun errore in console' + (errs.length ? ' ' + errs : ''));

@@ -79,9 +79,9 @@ function setupTheme() {
     document.documentElement.dataset.theme = t;
     btn.innerHTML = icon(t === 'dark' ? 'sun' : 'moon');
     btn.setAttribute('aria-label', t === 'dark' ? 'Passa al tema chiaro' : 'Passa al tema scuro');
-    if (meta) meta.content = t === 'dark' ? '#09090b' : '#f5f5f7';
+    if (meta) meta.content = t === 'dark' ? '#0a0c14' : '#ffffff';
   };
-  apply(document.documentElement.dataset.theme === 'light' ? 'light' : 'dark');
+  apply(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
   btn.addEventListener('click', () => {
     const t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     apply(t); try { localStorage.setItem('theme', t); } catch { /* ignora */ }
@@ -94,6 +94,7 @@ function renderProfile(p) {
   $('#tagline').textContent = p.tagline || '';
   $('#bio').textContent = p.bio || '';
   if (p.avatar) { const a = $('#avatar'); a.src = p.avatar; a.alt = p.avatarAlt || p.name || ''; }
+  $('#social').hidden = !visible(p.social).length;
   $('#social').innerHTML = sorted(visible(p.social)).map(s =>
     `<li><a href="${esc(safeUrl(s.url))}"${ext(s.url)} aria-label="${esc(s.name)}" title="${esc(s.name)}">${icon(s.icon)}</a></li>`).join('');
   const f = p.footer || {};
