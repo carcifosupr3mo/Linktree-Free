@@ -24,7 +24,8 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     ok(await p.locator('.featured-card').getAttribute('href') === 'https://photocarcifo.ch', 'link Photocarcifo corretto');
     const yF = (await p.locator('.featured-card').boundingBox()).y, yE = (await p.locator('#equipment').boundingBox()).y;
     ok(yF < yE && yF < (opts.viewport?.height || 900), 'card Photocarcifo prima e visibile above the fold');
-    ok(await p.locator('.link-card').count() === 1, '1 card link da links.json');
+    ok(await p.evaluate(() => [...document.querySelectorAll('.link-card, .featured-card')].every(e => e.getBoundingClientRect().right <= innerWidth + 1)), 'righe link dentro lo schermo');
+    ok(await p.locator('.link-card').count() === 2, '2 card link da links.json');
     ok(await p.locator('.product').count() === 12, '12 prodotti da equipment.json');
     ok(!(await p.locator('body').innerText()).match(/posseduto|venduto|in arrivo|info@photocarcifo|contatti/i), 'nessuna etichetta di stato né contatti visibili');
     ok(await p.locator('.cat-block').count() === 4, '4 categorie con prodotti');

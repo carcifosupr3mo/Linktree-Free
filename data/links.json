@@ -8,8 +8,8 @@
   },
   "groups": [
     {
-      "id": "social",
-      "title": "Social",
+      "id": "link",
+      "title": "",
       "order": 10,
       "items": [
         {
@@ -18,6 +18,13 @@
           "icon": "instagram",
           "url": "https://www.instagram.com/photocarcifo/",
           "order": 10
+        },
+        {
+          "name": "La mia attrezzatura",
+          "description": "Fotocamere, obiettivi e accessori che uso",
+          "icon": "camera",
+          "url": "#equipment",
+          "order": 20
         }
       ]
     }

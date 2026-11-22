@@ -1,6 +1,7 @@
 'use strict';
 
 /* ===== Costanti ===== */
+const V = '20261122e';
 const FALLBACK_IMG = 'assets/img/placeholders/other.svg';
 
 const P = {
@@ -44,7 +45,7 @@ const iconOrImg = (v, fallback = 'link') => /[./]/.test(v || '')
   : icon(v || fallback);
 
 async function getJSON(path) {
-  const r = await fetch(path, { cache: 'no-cache' });
+  const r = await fetch(`${path}?v=${V}`, { cache: 'no-cache' });
   if (!r.ok) throw new Error(`${path}: HTTP ${r.status}`);
   return r.json();
 }
@@ -117,8 +118,8 @@ function renderLinks(d) {
       </a>${copyBtn(absUrl(f.url), f.name)}`;
   }
   $('#links').innerHTML = sorted(visible(d.groups)).map((g, gi) => `
-    <section class="group" aria-labelledby="g-${esc(g.id)}">
-      <h2 id="g-${esc(g.id)}">${esc(g.title)}</h2>
+    <section class="group"${g.title ? ` aria-labelledby="g-${esc(g.id)}"` : ' aria-label="Link"'}>
+      ${g.title ? `<h2 id="g-${esc(g.id)}">${esc(g.title)}</h2>` : ''}
       <ul class="link-list">${sorted(visible(g.items)).map((l, i) => `
         <li class="link-card rise" style="--i:${gi * 3 + i + 2}">
           <a class="link-main" href="${esc(safeUrl(l.url))}"${ext(l.url)}>

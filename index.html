@@ -38,8 +38,8 @@
     try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
   </script>
   <link rel="preload" href="data/profile.json" as="fetch" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css?v=20261122b">
-  <script src="assets/js/app.js?v=20261122b" defer></script>
+  <link rel="stylesheet" href="assets/css/style.css?v=20261122e">
+  <script src="assets/js/app.js?v=20261122e" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Vai al contenuto</a>
@@ -57,22 +57,18 @@
 
   <main id="main">
     <div id="top" class="hero">
-      <div class="container">
+      <div class="container linktree">
         <header class="profile" id="profile">
-          <img id="avatar" class="avatar" src="assets/img/profile.svg" alt="Foto profilo di Nathan Pollini" width="140" height="140" decoding="async">
-          <div>
-            <p id="tagline" class="tagline"></p>
-            <h1 id="name">Nathan Pollini</h1>
-            <p id="bio" class="bio"></p>
-            <ul id="social" class="social" aria-label="Social"></ul>
-          </div>
+          <img id="avatar" class="avatar" src="assets/img/profile.svg" alt="Foto profilo di Nathan Pollini" width="120" height="120" decoding="async">
+          <p id="tagline" class="tagline"></p>
+          <h1 id="name">Nathan Pollini</h1>
+          <p id="bio" class="bio"></p>
+          <ul id="social" class="social" aria-label="Social" hidden></ul>
         </header>
-      </div>
-    </div>
 
-    <div class="container section">
-      <section id="featured" class="featured" aria-label="Progetto principale"></section>
-      <div id="links"></div>
+        <section id="featured" class="featured" aria-label="Progetto principale"></section>
+        <div id="links"></div>
+      </div>
     </div>
 
     <section id="equipment" class="container" aria-labelledby="equipment-title">
