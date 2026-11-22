@@ -1,94 +1,156 @@
 [
   {
-    "id": "esempio-fotocamera-1",
-    "placeholder": true,
+    "id": "sony-zv-e10-ii",
     "category": "cameras",
-    "name": "Fotocamera di esempio",
-    "brand": "Marca esempio",
-    "model": "Modello A",
-    "description": "PLACEHOLDER: sostituisci con la tua fotocamera reale.",
+    "name": "Sony ZV-E10 II",
+    "brand": "Sony",
+    "model": "ZV-E10 II",
+    "description": "",
     "image": "assets/img/placeholders/camera.svg",
-    "specs": {
-      "Sensore": "Esempio",
-      "Risoluzione": "Esempio"
-    },
-    "status": "owned",
-    "url": "https://example.com",
-    "order": 10
-  },
-  {
-    "id": "esempio-fotocamera-2",
-    "placeholder": true,
-    "category": "cameras",
-    "name": "Seconda fotocamera di esempio",
-    "brand": "Marca esempio",
-    "model": "Modello B",
-    "description": "PLACEHOLDER: esempio di prodotto in arrivo.",
-    "image": "assets/img/placeholders/camera.svg",
-    "specs": {
-      "Sensore": "Esempio"
-    },
-    "status": "incoming",
-    "url": null,
-    "order": 20
-  },
-  {
-    "id": "esempio-obiettivo-1",
-    "placeholder": true,
-    "category": "lenses",
-    "name": "Obiettivo di esempio",
-    "brand": "Marca esempio",
-    "model": "Modello 50",
-    "description": "PLACEHOLDER: sostituisci con il tuo obiettivo reale.",
-    "image": "assets/img/placeholders/lens.svg",
-    "specs": {
-      "Focale": "Esempio",
-      "Apertura": "Esempio"
-    },
-    "status": "owned",
-    "url": null,
-    "order": 10
-  },
-  {
-    "id": "esempio-obiettivo-2",
-    "placeholder": true,
-    "category": "lenses",
-    "name": "Obiettivo venduto di esempio",
-    "brand": "Marca esempio",
-    "model": "Modello 24",
-    "description": "PLACEHOLDER: esempio di prodotto venduto.",
-    "image": "assets/img/placeholders/lens.svg",
     "specs": {},
-    "status": "sold",
+    "status": "owned",
+    "url": null,
+    "order": 10
+  },
+  {
+    "id": "nikon-d7200",
+    "category": "cameras",
+    "name": "Nikon D7200",
+    "brand": "Nikon",
+    "model": "D7200",
+    "description": "",
+    "image": "assets/img/placeholders/camera.svg",
+    "specs": {},
+    "status": "owned",
     "url": null,
     "order": 20
   },
   {
-    "id": "esempio-accessorio-1",
-    "placeholder": true,
+    "id": "sony-18-105-f4",
+    "category": "lenses",
+    "name": "Sony E PZ 18-105mm f/4 G OSS",
+    "brand": "Sony",
+    "model": "E PZ 18-105mm f/4 G OSS",
+    "description": "Usato con la Sony ZV-E10 II.",
+    "image": "assets/img/placeholders/lens.svg",
+    "specs": {
+      "Focale": "18-105 mm",
+      "Apertura": "f/4"
+    },
+    "status": "owned",
+    "url": null,
+    "order": 10
+  },
+  {
+    "id": "nikon-af-s-dx-18-300",
+    "category": "lenses",
+    "name": "Nikon AF-S DX 18-300mm f/3.5-6.3G ED",
+    "brand": "Nikon",
+    "model": "AF-S DX 18-300mm f/3.5-6.3G ED",
+    "description": "Usato con la Nikon D7200.",
+    "image": "assets/img/placeholders/lens.svg",
+    "specs": {
+      "Focale": "18-300 mm",
+      "Apertura": "f/3.5-6.3"
+    },
+    "status": "owned",
+    "url": null,
+    "order": 20
+  },
+  {
+    "id": "sandisk-sd-256gb",
     "category": "accessories",
-    "name": "Accessorio di esempio",
-    "brand": "Marca esempio",
-    "model": "Modello T",
-    "description": "PLACEHOLDER: treppiede, filtri, borse, schede di memoria...",
+    "name": "SanDisk SD 256 GB",
+    "brand": "SanDisk",
+    "model": "SD 256 GB",
+    "description": "3 schede: 2 nella Nikon D7200, 1 nella Sony ZV-E10 II (V60).",
     "image": "assets/img/placeholders/accessory.svg",
-    "specs": {},
+    "specs": {
+      "Capacità": "256 GB"
+    },
     "status": "owned",
     "url": null,
     "order": 10
   },
   {
-    "id": "esempio-video-1",
-    "placeholder": true,
+    "id": "kf-concept-nd2-nd400-72mm",
+    "category": "accessories",
+    "name": "K&F Concept ND2-ND400 72mm",
+    "brand": "K&F Concept",
+    "model": "ND2-ND400 variabile 72 mm",
+    "description": "Filtro ND variabile, usato con il Sony 18-105mm f/4.",
+    "image": "assets/img/placeholders/accessory.svg",
+    "specs": {
+      "Diametro": "72 mm",
+      "Gradazione": "ND2-ND400 (1-9 stop)"
+    },
+    "status": "owned",
+    "url": null,
+    "order": 20
+  },
+  {
+    "id": "dji-rs4-mini-combo",
     "category": "video",
-    "name": "Attrezzatura video di esempio",
-    "brand": "Marca esempio",
-    "model": "Modello V",
-    "description": "PLACEHOLDER: gimbal, microfoni, luci, registratori...",
+    "name": "DJI RS 4 Mini Combo",
+    "brand": "DJI",
+    "model": "RS 4 Mini Combo",
+    "description": "Gimbal.",
     "image": "assets/img/placeholders/video.svg",
     "specs": {},
     "status": "owned",
     "url": null,
     "order": 10
+  },
+  {
+    "id": "dji-mic-mini",
+    "category": "video",
+    "name": "DJI Mic Mini",
+    "brand": "DJI",
+    "model": "Mic Mini (2 TX + 1 RX, custodia di ricarica)",
+    "description": "Kit con 2 trasmettitori, 1 ricevitore e custodia di ricarica.",
+    "image": "assets/img/placeholders/video.svg",
+    "specs": {},
+    "status": "owned",
+    "url": null,
+    "order": 20
+  },
+  {
+    "id": "falcam-f38-quick-release-rs4-mini",
+    "category": "video",
+    "name": "Falcam F38 Quick Release Kit per RS 4 Mini",
+    "brand": "Falcam",
+    "model": "F38B5201",
+    "description": "Kit a sgancio rapido per il gimbal DJI RS 4 Mini.",
+    "image": "assets/img/placeholders/video.svg",
+    "specs": {},
+    "status": "owned",
+    "url": null,
+    "order": 30
+  },
+  {
+    "id": "smallrig-shoulder-strap-4118b",
+    "category": "video",
+    "name": "SmallRig Shoulder Strap per stabilizzatori DJI",
+    "brand": "SmallRig",
+    "model": "4118B",
+    "description": "Tracolla per stabilizzatori DJI.",
+    "image": "assets/img/placeholders/video.svg",
+    "specs": {},
+    "status": "owned",
+    "url": null,
+    "order": 40
+  },
+  {
+    "id": "falcam-f38-sgancio-tracolla-v2",
+    "category": "accessories",
+    "name": "Falcam F38 sgancio rapido per tracolla V2",
+    "brand": "Falcam",
+    "model": "#3141",
+    "description": "Sgancio rapido per tracolla.",
+    "image": "assets/img/placeholders/accessory.svg",
+    "specs": {},
+    "status": "owned",
+    "url": null,
+    "order": 30
   }
 ]

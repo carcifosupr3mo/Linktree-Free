@@ -25,7 +25,7 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     const yF = (await p.locator('.featured-card').boundingBox()).y, yE = (await p.locator('#equipment').boundingBox()).y;
     ok(yF < yE && yF < (opts.viewport?.height || 900), 'card Photocarcifo prima e visibile above the fold');
     ok(await p.locator('.link-card').count() === 2, '2 card link da links.json');
-    ok(await p.locator('.product').count() === 6, '6 prodotti da equipment.json');
+    ok(await p.locator('.product').count() === 11, '11 prodotti da equipment.json');
     ok(await p.locator('.cat-block').count() === 4, '4 categorie con prodotti');
     ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'nessuno scroll orizzontale');
     // le immagini lazy si caricano solo in vista: porta ogni immagine in vista e attendi il caricamento
@@ -42,10 +42,10 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     ok(imgs === 0, 'tutte le immagini caricate');
 
     // ricerca
-    await p.fill('#search', 'video'); await p.waitForTimeout(300);
-    ok(await p.locator('.product').count() === 1, 'ricerca "video" → 1 risultato');
-    await p.fill('#search', 'obiettivo'); await p.waitForTimeout(300);
-    ok(await p.locator('.product').count() === 2, 'ricerca "obiettivo" → 2 risultati');
+    await p.fill('#search', 'dji'); await p.waitForTimeout(300);
+    ok(await p.locator('.product').count() === 4, 'ricerca "dji" → 4 risultati');
+    await p.fill('#search', 'sandisk'); await p.waitForTimeout(300);
+    ok(await p.locator('.product').count() === 1, 'ricerca "sandisk" → 1 risultato');
     await p.fill('#search', 'zzzz'); await p.waitForTimeout(300);
     ok(await p.locator('.empty').count() === 1, 'ricerca senza risultati → stato vuoto');
     await p.fill('#search', ''); await p.waitForTimeout(300);
@@ -54,26 +54,25 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     ok(await p.locator('.product').count() === 2, 'filtro Fotocamere → 2');
     ok(await p.locator('.chip[data-cat="cameras"]').getAttribute('aria-pressed') === 'true', 'chip attivo aria-pressed');
     await p.selectOption('#status-filter', 'incoming');
-    ok(await p.locator('.product').count() === 1, 'categoria + stato "in arrivo" → 1');
+    ok(await p.locator('.product').count() === 0, 'categoria + stato "in arrivo" → 0');
     await p.selectOption('#status-filter', 'all'); await p.click('.chip[data-cat="all"]');
     await p.selectOption('#status-filter', 'sold');
-    ok(await p.locator('.product').count() === 1, 'stato "venduto" → 1');
+    ok(await p.locator('.product').count() === 0, 'stato "venduto" → 0');
     await p.selectOption('#status-filter', 'all');
-    ok(await p.locator('.product').count() === 6, 'reset filtri → 6');
+    ok(await p.locator('.product').count() === 11, 'reset filtri → 11');
 
     // scheda + lightbox + tastiera
-    await p.locator('.product h3 button').first().focus(); await p.keyboard.press('Enter');
+    await p.locator('.product h3 button').nth(2).focus(); await p.keyboard.press('Enter');
     await p.waitForSelector('#product-dialog[open]');
-    ok(await p.locator('#pd-title').innerText() === 'Fotocamera di esempio', 'scheda prodotto aperta da tastiera');
-    ok(p.url().includes('#p=esempio-fotocamera-1'), 'deep link #p= impostato');
+    ok(await p.locator('#pd-title').innerText() === 'Sony E PZ 18-105mm f/4 G OSS', 'scheda prodotto aperta da tastiera');
+    ok(p.url().includes('#p=sony-18-105-f4'), 'deep link #p= impostato');
     ok(await p.locator('#product-dialog .specs dt').count() === 2, 'specifiche mostrate');
-    ok(await p.locator('#product-dialog a.btn-primary').count() === 1, 'link produttore presente');
     await p.click('[data-zoom]'); await p.waitForSelector('#lightbox[open]');
     ok(true, 'lightbox aperta');
     await p.keyboard.press('Escape');
     ok(await p.locator('#lightbox[open]').count() === 0 && await p.locator('#product-dialog[open]').count() === 1, 'Esc chiude solo la lightbox');
     await p.click('[data-copy-product]');
-    ok((await p.evaluate(() => navigator.clipboard.readText())).includes('#p=esempio-fotocamera-1'), 'copia link scheda');
+    ok((await p.evaluate(() => navigator.clipboard.readText())).includes('#p=sony-18-105-f4'), 'copia link scheda');
     await p.keyboard.press('Escape');
     ok(await p.locator('#product-dialog[open]').count() === 0, 'Esc chiude la scheda');
     await p.waitForTimeout(200);
@@ -97,8 +96,8 @@ const ok = (c, m) => { console.log((c ? '  PASS ' : '  FAIL ') + m); if (!c) fai
     if (SHOTS) { await p.waitForTimeout(800); await p.screenshot({ path: `${SHOTS}/${name.split(' ')[0]}-dark.png`, fullPage: true }); }
 
     // deep link
-    await p.goto(BASE + '/#p=esempio-video-1'); await p.waitForSelector('#product-dialog[open]');
-    ok(await p.locator('#pd-title').innerText() === 'Attrezzatura video di esempio', 'deep link apre la scheda');
+    await p.goto(BASE + '/#p=dji-mic-mini'); await p.waitForSelector('#product-dialog[open]');
+    ok(await p.locator('#pd-title').innerText() === 'DJI Mic Mini', 'deep link apre la scheda');
 
     ok(bad.length === 0, 'nessuna risposta HTTP >= 400' + (bad.length ? ' ' + bad : ''));
     ok(errs.length === 0, 'nessun errore in console' + (errs.length ? ' ' + errs : ''));
