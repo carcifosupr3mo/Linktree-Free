@@ -1,7 +1,7 @@
 'use strict';
 
 /* ===== Costanti ===== */
-const V = '20261122g';
+const V = '20261122h';
 const FALLBACK_IMG = 'assets/img/placeholders/other.svg';
 
 const P = {
@@ -122,7 +122,7 @@ function renderLinks(d) {
     $('#featured').innerHTML = `
       <a class="featured-card" href="${esc(safeUrl(f.url))}"${ext(f.url)}>
         <div class="featured-head">
-          <img class="featured-icon" src="${esc(f.icon || '')}" alt="" width="68" height="68" decoding="async">
+          ${f.icon ? `<img class="featured-icon" src="${esc(f.icon)}" alt="" width="68" height="68" decoding="async">` : ''}
           <div><span class="eyebrow">${esc(t('featured'))}</span><h2>${esc(tr(f.name))}</h2><p>${esc(tr(f.description))}</p></div>
         </div>
         <span class="btn btn-primary">${esc(tr(f.cta) || 'OK')} ${icon('arrow')}</span>
